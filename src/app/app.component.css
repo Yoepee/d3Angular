@@ -1,0 +1,11 @@
+svg {
+    width: 500px;
+    height: 500px;
+    border: 1px gray solid;
+}
+
+.canvas > svg{
+    width: 500px;
+    height: 500px;
+    border: 1px gray solid;
+}

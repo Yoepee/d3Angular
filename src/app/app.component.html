@@ -1,0 +1,34 @@
+<app-line></app-line>
+<app-rxjs></app-rxjs>
+<svg>
+  <g>
+    <circle cy="50" cx="50" r="30"></circle>
+    <circle cy="150" cx="150" r="30"></circle>
+    <circle cy="250" cx="250" r="30"></circle>
+    <circle cy="350" cx="350" r="30"></circle>
+    <circle cy="450" cx="450" r="30"></circle>
+    <rect x="300" y="20" width="100" height="100" 
+    style="fill: chocolate; stroke:black;"></rect>
+    <rect x="100" y="20" width="100" height="100" 
+    style="fill: chocolate; stroke:black; stroke-width: 50px;"></rect>
+    <path d="M 100,300 100,350 200,300 200,350"></path>
+  </g>
+  <text x="400" y="400">헬로 월드</text>
+</svg>
+<div class="canvas" style ="width: 700px; height:700px;" ></div>
+<script>
+  const canvas = d3.select(".canvas");
+
+  const svg = cavas.append('svg')
+              .attr('height', 1000)
+              .attr('width', 1000);
+
+  svg.append('text')
+      .attr('x', 200)
+      .attr('y', 200)
+      .text('hello world')
+      .style('font-weight', 'bold')
+      .style('font-size','34px')
+      .style('font-family', 'pacifico');
+
+</script>
