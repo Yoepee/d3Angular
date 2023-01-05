@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3'
+import { NumberValue } from 'd3';
 // import { Alpha } from '../line';
 @Component({
   selector: 'app-line',
@@ -145,34 +146,34 @@ export class LineComponent implements OnInit {
 
   LineChart(data: { date: Date, value: number }[]) {
     const x = d3.scaleTime()
-      // .domain(d3.extent(data, d => d.date))
+      .domain(d3.extent(data, d => d.date) as any)
       .range([this.margin.left, this.width - this.margin.right]);
 
     const y = d3.scaleLinear()
-      // .domain([0, d3.max(data, d => d.value)]).nice()
+      .domain([0, d3.max(data, d => d.value)] as any).nice()
       .range([this.height - this.margin.bottom, this.margin.top]);
 
-    const xAxis = (g: { attr: (arg0: string, arg1: string) => { (): any; new(): any; call: { (arg0: d3.Axis<Date | d3.NumberValue>): any; new(): any; }; }; }) => g
-      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
-      .call(d3.axisBottom(x).ticks(this.width / 90).tickSizeOuter(0));
+      // const xAxis = g => g
+      // .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
+      // .call(d3.axisBottom(x).ticks(this.width / 90).tickSizeOuter(0));
 
-    const yAxis = (g: { attr: (arg0: string, arg1: string) => { (): any; new(): any; call: { (arg0: d3.Axis<d3.NumberValue>): { (): any; new(): any; call: { (arg0: (g: any) => any): { (): any; new(): any; call: { (arg0: (g: any) => any): any; new(): any; }; }; new(): any; }; }; new(): any; }; }; }) => g
-      .attr("transform", `translate(${this.margin.left},0)`)
-      .call(d3.axisLeft(y))
-      .call((g: { select: (arg0: string) => { (): any; new(): any; remove: { (): any; new(): any; }; }; }) => g.select(".domain").remove())
-      .call((g: { select: (arg0: string) => { (): any; new(): any; clone: { (): { (): any; new(): any; attr: { (arg0: string, arg1: number): { (): any; new(): any; attr: { (arg0: string, arg1: string): { (): any; new(): any; attr: { (arg0: string, arg1: string): { (): any; new(): any; attr: { (arg0: string, arg1: string): { (): any; new(): any; text: { (arg0: string): any; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; }) => {
-        return g.select(".tick:last-of-type text").clone()
-          .attr("x", 3)
-          .attr("text-anchor", "start")
-          .attr("font-weight", "bold")
-          .attr("font-size", '20px')
-          .text('Y축')
-      });
+      // const yAxis = g => g
+      // .attr("transform", `translate(${this.margin.left},0)`)
+      // .call(d3.axisLeft(y))
+      // .call(g => g.select(".domain").remove())
+      // .call(g => {
+      //   return g.select(".tick:last-of-type text").clone()
+      //     .attr("x", 3)
+      //     .attr("text-anchor", "start")
+      //     .attr("font-weight", "bold")
+      //     .attr("font-size", '20px')
+      //     .text('Y축')
+      //   });
 
-    const line = d3.line()
-      // .defined(d => !isNaN(d.value))
-      // .x(d => x(d.date))
-      // .y(d => y(d.value));
+    const line:any = d3.line()
+    .defined((d:any) => !isNaN(d.value))
+    .x((d:any) => x(d.date ))
+    .y((d:any) => y(d.value));
 
     const svg = d3.select('.line').append('svg').style('width', this.width).style('height', this.height);
     svg.append("path")
@@ -182,9 +183,24 @@ export class LineComponent implements OnInit {
       .attr("stroke-width", 1)
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
-      // .attr("d", line);
-    // svg.append('g').call(xAxis);
-    // svg.append('g').call(yAxis);
+      .attr("d", line);
+    svg.append('g')
+    .call(g => g
+      .attr("transform", `translate(0,${this.height - this.margin.bottom})`)
+      .call(d3.axisBottom(x).ticks(this.width / 90).tickSizeOuter(0)));
+    svg.append('g')
+    .call(g => g
+      .attr("transform", `translate(${this.margin.left},0)`)
+      .call(d3.axisLeft(y))
+      .call(g => g.select(".domain").remove())
+      .call(g => {
+        return g.select(".tick:last-of-type text").clone()
+          .attr("x", 3)
+          .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .attr("font-size", '20px')
+          .text('Y축')
+        }));
     svg.node();
   }
 
