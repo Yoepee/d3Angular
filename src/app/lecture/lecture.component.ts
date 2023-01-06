@@ -136,94 +136,195 @@ export class LectureComponent implements OnInit {
    * d3.tsv로 tsv형식 불러오기
    * d3.json으로 json 형식 불러오기
    */
+  // constructor() { }
+  // ngOnInit() {
+  //   const canvas = d3.select('.canvas');
+
+  //   // console.log(d3.csv("/assets/data/data1.csv"))
+
+  //   d3.csv("/assets/data/data1.csv")
+  //     .then((data) => {
+  //       console.log(data)
+  //       // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+  //       // const svg = canvas.append('svg')
+  //       // .attr('height', 2000)
+  //       // .attr('width', 2000);
+
+  //       data.forEach(e => {
+  //         console.log(e['출판연도'])
+  //       })
+  //     })
+  //     .catch(err => console.log(err))
+
+  //   /**
+  //    * 파일 불러오기가 깨진다면 메모장 저장을 이용하요 UTF-8으로 인코딩 저장
+  //    */
+  //   // console.log(d3.csv("/assets/data/sample2.csv"))
+
+
+  //   // d3.csv("/assets/data/sample2.csv")
+  //   // .then((data) => {
+  //   //   console.log(data)
+  //   //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+  //   //   // const svg = canvas.append('svg')
+  //   //   // .attr('height', 2000)
+  //   //   // .attr('width', 2000);
+
+  //   //   data.forEach(e=>{
+  //   //     console.log(e['출판연도'])
+  //   //   })
+  //   // })
+  //   // .catch(err => console.log(err))
+
+  //   // d3.csv("/assets/data/data2.csv")
+  //   // .then((data) => {
+  //   //   console.log( data );
+  //   //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+  //   //   const svg = canvas.append('svg')
+  //   //   .attr('height', 2000)
+  //   //   .attr('width', 2000);
+
+  //   //   data.forEach(e=>{
+  //   //     svg.append('circle')
+  //   //     .attr('cx', (e['위도'] as any - 33.1) * 1000 + 10)
+  //   //     .attr('cy', (e['경도'] as any - 126) * 300 + 10)
+  //   //     .attr('r',5)
+  //   //     .attr('fill', 'hotpink')
+  //   //   })
+  //   // })
+  //   // .catch(err => console.log(err))
+
+  //   /** json 형식 불러오기 */
+  //   d3.json("https://raw.githubusercontent.com/paullabkorea/coronaVaccinationStatus/main/data/data.json")
+  //     .then((data) => {
+  //       console.log(data)
+  //       // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+  //       // const svg = canvas.append('svg')
+  //       // .attr('height', 2000)
+  //       // .attr('width', 2000);
+  //       // data.forEach(res=>{
+  //       //   console.log(res.array.['총인구'])
+  //       // })
+  //     })
+  //     .catch(err => console.log(err))
+
+  //   /** xml 형식 불러오기 */
+  //   d3.xml("/assets/data/data5.xml")
+  //     .then((data) => {
+  //       console.log('성공!!');
+  //       console.log(data); // 그냥 열면 깨지고 메모장으로 utf-8로 바꿔 저장해주세요.
+  //       console.log(data.documentElement);
+  //       console.log(data.documentElement.getElementsByTagName('row')); //DOM 탐색처럼 사용
+  //       new Array(data.documentElement.getElementsByTagName('row')).forEach(e => {
+  //         console.log(e)
+  //         console.log(e[0].children) // 보기좋기 위해 data에 enter를 넣었기 때문에 text가 들어가 있습니다.
+  //       });
+
+
+  //       // console.log(data[''])
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+  
+  /**
+   * 데이터 컨트롤
+   * 데이터가 화면에 표시될 때 데이터 정규화 작업이 필요
+   * range - y축
+   * domain - x축
+   */
   constructor() { }
   ngOnInit() {
-    const canvas = d3.select('.canvas');
+    /**
+    * scalePoint 간격에 맞게 값을 변경해줍니다 (갯수에 따른 간격)
+    * range = 전체 width
+    * domain = 전체 count를 range 값으로 동일하게 분할하여 분배
+    * 
+    * padding 여유 간격을 추가
+    */
+    // const f1 = d3.scalePoint()
+    // .range([0,100])
+    // .domain(['10', '12','20','30','40'] as any)
+    // console.log(f1('12'))
 
-    // console.log(d3.csv("/assets/data/data1.csv"))
+    // const f2 = d3.scalePoint()
+    // .range([0,100])
+    // .domain(['a','b','c','d'] as any)
+    // console.log(f2('d'))
 
-    d3.csv("/assets/data/data1.csv")
-      .then((data) => {
-        console.log(data)
-        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-        // const svg = canvas.append('svg')
-        // .attr('height', 2000)
-        // .attr('width', 2000);
-
-        data.forEach(e => {
-          console.log(e['출판연도'])
-        })
-      })
-      .catch(err => console.log(err))
+    // const f3 = d3.scalePoint()
+    // .range([0,100])
+    // .domain(['a','b','c','d'] as any).padding(0.3)
+    // console.log(f3('d'))
 
     /**
-     * 파일 불러오기가 깨진다면 메모장 저장을 이용하요 UTF-8으로 인코딩 저장
+     * scaleLinear 비율에 맞게 값을 변경 (비율에 따른 간격)
+     * domaine = 변환 전 값
+     * range = 변환 후 값의 범위
      */
-    // console.log(d3.csv("/assets/data/sample2.csv"))
+    // const f1 = d3.scaleLinear()
+    //   .range([0, 100])
+    //   .domain([0, 500])
+    // console.log(f1(1000))
 
+    // const f2 = d3.scaleLinear()
+    //   .range(['orange','white','green'] as any)
+    //   .domain([-1,0 ,1])
+    // console.log(f2(-0.5))
 
-    // d3.csv("/assets/data/sample2.csv")
-    // .then((data) => {
-    //   console.log(data)
-    //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-    //   // const svg = canvas.append('svg')
-    //   // .attr('height', 2000)
-    //   // .attr('width', 2000);
+    // const f3 = d3.scaleLinear()
+    // .range([200,500])
+    // .domain([20000000, 50000000])
+    // console.log(f3(25000000))
 
-    //   data.forEach(e=>{
-    //     console.log(e['출판연도'])
-    //   })
-    // })
-    // .catch(err => console.log(err))
+    /**
+     * scaleBand 숫자가 아닌 키 값으로 찾을 수 있게 해줌
+     * 
+     */
+    // const f = d3.scaleBand()
+    // .domain(['one', 'two', 'three', 'four'])
+    // .range([0,100])
 
-    // d3.csv("/assets/data/data2.csv")
-    // .then((data) => {
-    //   console.log( data );
-    //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-    //   const svg = canvas.append('svg')
-    //   .attr('height', 2000)
-    //   .attr('width', 2000);
+    // console.log(f('one'))
+    // console.log(f('two'))
+    // console.log(f('three'))
+    // console.log(f('four'))
 
-    //   data.forEach(e=>{
-    //     svg.append('circle')
-    //     .attr('cx', (e['위도'] as any - 33.1) * 1000 + 10)
-    //     .attr('cy', (e['경도'] as any - 126) * 300 + 10)
-    //     .attr('r',5)
-    //     .attr('fill', 'hotpink')
-    //   })
-    // })
-    // .catch(err => console.log(err))
+    // console.log(f.bandwidth())
 
-    /** json 형식 불러오기 */
-    d3.json("https://raw.githubusercontent.com/paullabkorea/coronaVaccinationStatus/main/data/data.json")
-      .then((data) => {
-        console.log(data)
-        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-        // const svg = canvas.append('svg')
-        // .attr('height', 2000)
-        // .attr('width', 2000);
-        // data.forEach(res=>{
-        //   console.log(res.array.['총인구'])
-        // })
-      })
-      .catch(err => console.log(err))
+    /**
+     * min = 최솟값
+     * max = 최댓값
+     * extent = [최솟값, 최댓값]
+     * mean = 평균값
+     */
+    const data1 = [10, 20, 30]
+    const data2 = [{
+            age:10,
+            power:3000
+        },{
+            age:20,
+            power:2000
+        },{
+            age:30,
+            power:1000
+        }]
 
-    /** xml 형식 불러오기 */
-    d3.xml("/assets/data/data5.xml")
-      .then((data) => {
-        console.log('성공!!');
-        console.log(data); // 그냥 열면 깨지고 메모장으로 utf-8로 바꿔 저장해주세요.
-        console.log(data.documentElement);
-        console.log(data.documentElement.getElementsByTagName('row')); //DOM 탐색처럼 사용
-        new Array(data.documentElement.getElementsByTagName('row')).forEach(e => {
-          console.log(e)
-          console.log(e[0].children) // 보기좋기 위해 data에 enter를 넣었기 때문에 text가 들어가 있습니다.
-        });
+        const min1 = d3.min(data1)
+        const min2 = d3.min(data2, d => d.age)
+        console.log(min1, min2)
 
+        const max1 = d3.max(data1)
+        const max2 = d3.max(data2, d => d.power)
+        console.log(max1, max2)
 
-        // console.log(data[''])
-      })
-      .catch(err => console.log(err))
+        const extent1 = d3.extent(data1) // return [min, max]
+        const extent2 = d3.extent(data2, d => d.power) // return [min, max]
+        console.log(extent1, extent2)
 
+        let [a, b] = d3.extent(data1)
+        console.log(a, b)
+
+        const mean = d3.mean(data1)
+        console.log(mean)
   }
 }
