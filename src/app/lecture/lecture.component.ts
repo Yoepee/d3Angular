@@ -8,8 +8,8 @@ import * as d3 from 'd3';
 })
 
 export class LectureComponent implements OnInit {
-  constructor() { }
-  ngOnInit() {}
+  // constructor() { }
+  // ngOnInit() {}
   /**
    * 막대그래프 샘플 예제
    */
@@ -129,4 +129,101 @@ export class LectureComponent implements OnInit {
   //       return d[3];
   //     })
   // }
+
+  /**
+   * 데이터 로드
+   * d3.csv로 csv형식 불러오기
+   * d3.tsv로 tsv형식 불러오기
+   * d3.json으로 json 형식 불러오기
+   */
+  constructor() { }
+  ngOnInit() {
+    const canvas = d3.select('.canvas');
+
+    // console.log(d3.csv("/assets/data/data1.csv"))
+
+    d3.csv("/assets/data/data1.csv")
+      .then((data) => {
+        console.log(data)
+        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+        // const svg = canvas.append('svg')
+        // .attr('height', 2000)
+        // .attr('width', 2000);
+
+        data.forEach(e => {
+          console.log(e['출판연도'])
+        })
+      })
+      .catch(err => console.log(err))
+
+    /**
+     * 파일 불러오기가 깨진다면 메모장 저장을 이용하요 UTF-8으로 인코딩 저장
+     */
+    // console.log(d3.csv("/assets/data/sample2.csv"))
+
+
+    // d3.csv("/assets/data/sample2.csv")
+    // .then((data) => {
+    //   console.log(data)
+    //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+    //   // const svg = canvas.append('svg')
+    //   // .attr('height', 2000)
+    //   // .attr('width', 2000);
+
+    //   data.forEach(e=>{
+    //     console.log(e['출판연도'])
+    //   })
+    // })
+    // .catch(err => console.log(err))
+
+    // d3.csv("/assets/data/data2.csv")
+    // .then((data) => {
+    //   console.log( data );
+    //   // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+    //   const svg = canvas.append('svg')
+    //   .attr('height', 2000)
+    //   .attr('width', 2000);
+
+    //   data.forEach(e=>{
+    //     svg.append('circle')
+    //     .attr('cx', (e['위도'] as any - 33.1) * 1000 + 10)
+    //     .attr('cy', (e['경도'] as any - 126) * 300 + 10)
+    //     .attr('r',5)
+    //     .attr('fill', 'hotpink')
+    //   })
+    // })
+    // .catch(err => console.log(err))
+
+    /** json 형식 불러오기 */
+    d3.json("https://raw.githubusercontent.com/paullabkorea/coronaVaccinationStatus/main/data/data.json")
+      .then((data) => {
+        console.log(data)
+        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+        // const svg = canvas.append('svg')
+        // .attr('height', 2000)
+        // .attr('width', 2000);
+        // data.forEach(res=>{
+        //   console.log(res.array.['총인구'])
+        // })
+      })
+      .catch(err => console.log(err))
+
+    /** xml 형식 불러오기 */
+    d3.xml("/assets/data/data5.xml")
+      .then((data) => {
+        console.log('성공!!');
+        console.log(data); // 그냥 열면 깨지고 메모장으로 utf-8로 바꿔 저장해주세요.
+        console.log(data.documentElement);
+        console.log(data.documentElement.getElementsByTagName('row')); //DOM 탐색처럼 사용
+        new Array(data.documentElement.getElementsByTagName('row')).forEach(e => {
+          console.log(e)
+          console.log(e[0].children) // 보기좋기 위해 data에 enter를 넣었기 때문에 text가 들어가 있습니다.
+        });
+
+
+        // console.log(data[''])
+      })
+      .catch(err => console.log(err))
+
+  }
 }
