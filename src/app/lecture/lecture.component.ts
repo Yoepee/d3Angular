@@ -487,33 +487,33 @@ export class LectureComponent implements OnInit {
     //arc 만들기
     // const f = d3.arc().innerRadius().outerRadius().startAngle).endAngle();
 
-    const data:any = [50, 150, 100, 200]
-    const g = svg.append('g')
-      .attr('transform', 'translate(100,100)');
+    // const data:any = [50, 150, 100, 200]
+    // const g = svg.append('g')
+    //   .attr('transform', 'translate(100,100)');
       
 
-    const f:any = d3.arc()
-    .innerRadius(0)
-    .outerRadius(50)
-    // .startAngle(Math.PI * 1)
-    // .endAngle(Math.PI * 1.5)
+    // const f:any = d3.arc()
+    // .innerRadius(0)
+    // .outerRadius(50)
+    // // .startAngle(Math.PI * 1)
+    // // .endAngle(Math.PI * 1.5)
 
-    console.log(f(data))
+    // console.log(f(data))
 
-    const pie = d3.pie() //pie는 레이아웃
-    .sort((a:any,b:any)=> b-a) //내림차순 정렬
-    .value((d:any)=>d) //object일 때, d.value
+    // const pie = d3.pie() //pie는 레이아웃
+    // .sort((a:any,b:any)=> b-a) //내림차순 정렬
+    // .value((d:any)=>d) //object일 때, d.value
 
-    console.log(pie(data))
+    // console.log(pie(data))
 
-    g.selectAll('path')
-    .data(pie(data))
-    .enter()
-    .append('path')
-    .attr('fill', 'pink')
-    .attr('stroke', 'blue')
-    .attr('stroke-width', '2px')
-    // .attr('d', f(data))
-    .attr('d', f)
+    // g.selectAll('path')
+    // .data(pie(data))
+    // .enter()
+    // .append('path')
+    // .attr('fill', 'pink')
+    // .attr('stroke', 'blue')
+    // .attr('stroke-width', '2px')
+    // // .attr('d', f(data))
+    // .attr('d', f)
   }
 }
