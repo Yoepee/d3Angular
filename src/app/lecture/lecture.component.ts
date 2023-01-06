@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { curveBasis } from 'd3';
 
 @Component({
   selector: 'app-lecture',
@@ -330,100 +331,189 @@ export class LectureComponent implements OnInit {
    * 실전 그래프 그리기 
    * 막대 그래프
   */
-  constructor() { }
-  ngOnInit() {
-    const canvas = d3.select('.canvas')
-
-    const width = 800;
-    const height = 800;
-    const svg = canvas.append('svg')
-        .attr('height', height)
-        .attr('width', width);
-
-    let [mt, mb, mr, ml] = [50, 50, 50, 50];
-
-    const graphWidth = width - ml - mr;
-    const graphHeight = height - mt - mb;
-
-    const graph = svg. append('g')
-       .attr('width', graphWidth)
-       .attr('height', graphHeight)
-       .attr('transform', `translate(${ml},${mt})`)
-
-       const xAxisG = graph.append('g')
-                            .attr('transform', `translate(0, ${graphHeight})`)
-        const yAxisG = graph.append('g')
-
-    d3.json("/assets/data/data4.json")
-      .then((data:any) => {
-        data.splice(0,1);
-        console.log(data)
-        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-
-        console.log(data.map((item:any)=>item['지역이름']))
-
-        const x:any = d3.scaleBand()
-        .domain(data.map((item:any)=>item['지역이름']))
-        .range([0, graphWidth])
-        .padding(0.25)
-
-        console.log(x('서울'))
-
-        const y = d3.scaleLinear()
-        .range([graphHeight, 0])
-        .domain([0, (d3.max(data,(item:any)=>item['확진자수'])) as any])
-        
-        const bars = graph.selectAll('rect')
-        .data(data)
-
-        bars.enter()
-        .append('rect')
-        .attr('height', (d:any)=>graphHeight - y(d.확진자수))
-        .attr('width', x.bandwidth())
-        .attr('fill', 'hotpink')
-        .attr('x', (d:any)=> x(d['지역이름']))
-        .attr('y', (d:any)=> y(d['확진자수']))
-        
-        // data.forEach((res:any)=>{
-        //   console.log(res['지역이름'])
-        // })
-
-        bars.enter()
-        .append('text')
-        .attr('x', (d:any)=>{ return x(d['지역이름'])})
-        .attr('y', (d:any)=> y(d['확진자수'])-5)
-        .text((d:any)=> (d['확진자수']))
-
-        const line: any = d3.line()
-        .x((d:any)=>x(d['지역이름']))
-        .y((d:any)=> y(d['확진자수']))
-        .curve(d3.curveBasis)
-
-        bars.enter()
-        .append('path')
-        .attr('fill', 'none')
-        .attr('stroke', 'blue')
-        .attr('stroke-width', '2px')
-        .attr('d', line(data))
-
-        const xAxis = d3.axisBottom(x);
-        const yAxis = d3.axisLeft(y)
-        .ticks(100);
-
-        xAxisG.call(xAxis)
-        yAxisG.call(yAxis)
-
-        xAxisG.selectAll('text')
-        .attr('fill', 'blue')
-      })
-      .catch(err => console.log(err))
-  }
-
-/**
- * 실전그래프 2
- */
   // constructor() { }
   // ngOnInit() {
+  //   const canvas = d3.select('.canvas')
 
+  //   const width = 800;
+  //   const height = 800;
+  //   const svg = canvas.append('svg')
+  //       .attr('height', height)
+  //       .attr('width', width);
+
+  //   let [mt, mb, mr, ml] = [50, 50, 50, 50];
+
+  //   const graphWidth = width - ml - mr;
+  //   const graphHeight = height - mt - mb;
+
+  //   const graph = svg. append('g')
+  //      .attr('width', graphWidth)
+  //      .attr('height', graphHeight)
+  //      .attr('transform', `translate(${ml},${mt})`)
+
+  //      const xAxisG = graph.append('g')
+  //                           .attr('transform', `translate(0, ${graphHeight})`)
+  //       const yAxisG = graph.append('g')
+
+  //   d3.json("/assets/data/data4.json")
+  //     .then((data:any) => {
+  //       data.splice(0,1);
+  //       console.log(data)
+  //       // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+
+  //       console.log(data.map((item:any)=>item['지역이름']))
+
+  //       const x:any = d3.scaleBand()
+  //       .domain(data.map((item:any)=>item['지역이름']))
+  //       .range([0, graphWidth])
+  //       .padding(0.25)
+
+  //       console.log(x('서울'))
+
+  //       const y = d3.scaleLinear()
+  //       .range([graphHeight, 0])
+  //       .domain([0, (d3.max(data,(item:any)=>item['확진자수'])) as any])
+        
+  //       const bars = graph.selectAll('rect')
+  //       .data(data)
+
+  //       bars.enter()
+  //       .append('rect')
+  //       .attr('height', (d:any)=>graphHeight - y(d.확진자수))
+  //       .attr('width', x.bandwidth())
+  //       .attr('fill', 'hotpink')
+  //       .attr('x', (d:any)=> x(d['지역이름']))
+  //       .attr('y', (d:any)=> y(d['확진자수']))
+        
+  //       // data.forEach((res:any)=>{
+  //       //   console.log(res['지역이름'])
+  //       // })
+
+  //       bars.enter()
+  //       .append('circle')
+  //       .attr('width', x.bandwidth())
+  //       .attr('fill', 'red')
+  //       .attr('cx', (d:any)=> x(d['지역이름'])+15)
+  //       .attr('cy', (d:any)=> y(d['확진자수']))
+  //       .attr('r', (d:any)=> d.확진자수/50)
+
+  //       bars.enter()
+  //       .append('text')
+  //       .attr('x', (d:any)=>{ return x(d['지역이름'])})
+  //       .attr('y', (d:any)=> y(d['확진자수'])-5)
+  //       .text((d:any)=> (d['확진자수']))
+
+  //       /**
+  //        * 라인그래프 추가 
+  //        */
+  //       const line: any = d3.line()
+  //       .x((d:any)=>x(d['지역이름']))
+  //       .y((d:any)=> y(d['확진자수']))
+  //       .curve(d3.curveBasis)
+
+  //       bars.enter()
+  //       .append('path')
+  //       .attr('fill', 'none')
+  //       .attr('stroke', 'blue')
+  //       .attr('stroke-width', '2px')
+  //       .attr('d', line(data))
+
+  //       const xAxis = d3.axisBottom(x);
+  //       const yAxis = d3.axisLeft(y)
+  //       .ticks(100);
+
+  //       xAxisG.call(xAxis)
+  //       yAxisG.call(yAxis)
+
+  //       xAxisG.selectAll('text')
+  //       .attr('fill', 'blue')
+  //     })
+  //     .catch(err => console.log(err))
   // }
+
+/**
+ * 생성기- 데이터를 입력받아 해당 객체를 그릴수 있는 svg 코드 반환
+ * 컴포넌트 
+ * 레이아웃
+ */
+  constructor() { }
+  ngOnInit() {
+    // const f = d3.line().x().y().curve() 의 형태로 선언
+    const canvas = d3.select('.canvas');
+    const svg = canvas.append('svg')
+    .attr('height', 2000)
+    .attr('width', 2000);
+
+    // 라인
+    // const data:any = [5,15, 10, 20, 5, 10, 25, 15]
+    // const xfunction = (data:any, index:number) => index*10
+    // const yfunction = (data:any, index:number) => 100-data
+
+    // const f = d3.line()
+    // .x(xfunction)
+    // .y(yfunction)
+    // .curve(curveBasis)
+
+    // console.log(f(data))
+
+    // svg.append('path')
+    // .attr('fill', 'none')
+    // .attr('stroke', 'blue')
+    // .attr('stroke-width','2px')
+    // .attr('d', f(data))
+
+    // area 만들기
+    // const f = d3.area().x().y0.y1().curve()
+    // const data:any = [5,15, 10, 20, 5, 10, 25, 15]
+    // const xfunction = (data:any, index:number) => index*10
+    // const y0function = (data:any, index:number) => 100-data
+    // const y1function = (data:any, index:number) => 100-data+20 + index*10
+
+    // const f = d3.area()
+    // .x(xfunction)
+    // .y0(y0function)
+    // .y1(y1function)
+    // // curveStep으로 선형 라인 생성가능
+    // .curve(d3.curveStep)
+
+    // console.log(f(data))
+
+    // svg.append('path')
+    // .attr('fill', 'none')
+    // .attr('stroke', 'blue')
+    // .attr('stroke-width','2px')
+    // .attr('d', f(data))
+    
+    //arc 만들기
+    // const f = d3.arc().innerRadius().outerRadius().startAngle).endAngle();
+
+    const data:any = [50, 150, 100, 200]
+    const g = svg.append('g')
+      .attr('transform', 'translate(100,100)');
+      
+
+    const f:any = d3.arc()
+    .innerRadius(0)
+    .outerRadius(50)
+    // .startAngle(Math.PI * 1)
+    // .endAngle(Math.PI * 1.5)
+
+    console.log(f(data))
+
+    const pie = d3.pie() //pie는 레이아웃
+    .sort((a:any,b:any)=> b-a) //내림차순 정렬
+    .value((d:any)=>d) //object일 때, d.value
+
+    console.log(pie(data))
+
+    g.selectAll('path')
+    .data(pie(data))
+    .enter()
+    .append('path')
+    .attr('fill', 'pink')
+    .attr('stroke', 'blue')
+    .attr('stroke-width', '2px')
+    // .attr('d', f(data))
+    .attr('d', f)
+  }
 }
