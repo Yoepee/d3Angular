@@ -330,85 +330,100 @@ export class LectureComponent implements OnInit {
    * 실전 그래프 그리기 
    * 막대 그래프
   */
-//   constructor() { }
-//   ngOnInit() {
-//     const canvas = d3.select('.canvas')
+  constructor() { }
+  ngOnInit() {
+    const canvas = d3.select('.canvas')
 
-//     const width = 800;
-//     const height = 800;
-//     const svg = canvas.append('svg')
-//         .attr('height', height)
-//         .attr('width', width);
+    const width = 800;
+    const height = 800;
+    const svg = canvas.append('svg')
+        .attr('height', height)
+        .attr('width', width);
 
-//     let [mt, mb, mr, ml] = [50, 50, 50, 50];
+    let [mt, mb, mr, ml] = [50, 50, 50, 50];
 
-//     const graphWidth = width - ml - mr;
-//     const graphHeight = height - mt - mb;
+    const graphWidth = width - ml - mr;
+    const graphHeight = height - mt - mb;
 
-//     const graph = svg. append('g')
-//        .attr('width', graphWidth)
-//        .attr('height', graphHeight)
-//        .attr('transform', `translate(${ml},${mt})`)
+    const graph = svg. append('g')
+       .attr('width', graphWidth)
+       .attr('height', graphHeight)
+       .attr('transform', `translate(${ml},${mt})`)
 
-//        const xAxisG = graph.append('g')
-//                             .attr('transform', `translate(0, ${graphHeight})`)
-//         const yAxisG = graph.append('g')
+       const xAxisG = graph.append('g')
+                            .attr('transform', `translate(0, ${graphHeight})`)
+        const yAxisG = graph.append('g')
 
-//     d3.json("/assets/data/data4.json")
-//       .then((data:any) => {
-//         data.splice(0,1);
-//         console.log(data)
-//         // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+    d3.json("/assets/data/data4.json")
+      .then((data:any) => {
+        data.splice(0,1);
+        console.log(data)
+        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
 
-//         console.log(data.map((item:any)=>item['지역이름']))
+        console.log(data.map((item:any)=>item['지역이름']))
 
-//         const x:any = d3.scaleBand()
-//         .domain(data.map((item:any)=>item['지역이름']))
-//         .range([0, graphWidth])
-//         .padding(0.25)
+        const x:any = d3.scaleBand()
+        .domain(data.map((item:any)=>item['지역이름']))
+        .range([0, graphWidth])
+        .padding(0.25)
 
-//         console.log(x('서울'))
+        console.log(x('서울'))
 
-//         const y = d3.scaleLinear()
-//         .range([graphHeight, 0])
-//         .domain([0, (d3.max(data,(item:any)=>item['확진자수'])) as any])
+        const y = d3.scaleLinear()
+        .range([graphHeight, 0])
+        .domain([0, (d3.max(data,(item:any)=>item['확진자수'])) as any])
         
-//         const bars = graph.selectAll('rect')
-//         .data(data)
+        const bars = graph.selectAll('rect')
+        .data(data)
 
-//         bars.enter()
-//         .append('rect')
-//         .attr('height', (d:any)=>graphHeight - y(d.확진자수))
-//         .attr('width', x.bandwidth())
-//         .attr('fill', 'hotpink')
-//         .attr('x', (d:any)=> x(d['지역이름']))
-//         .attr('y', (d:any)=> y(d['확진자수']))
+        bars.enter()
+        .append('rect')
+        .attr('height', (d:any)=>graphHeight - y(d.확진자수))
+        .attr('width', x.bandwidth())
+        .attr('fill', 'hotpink')
+        .attr('x', (d:any)=> x(d['지역이름']))
+        .attr('y', (d:any)=> y(d['확진자수']))
         
-//         // data.forEach((res:any)=>{
-//         //   console.log(res['지역이름'])
-//         // })
+        // data.forEach((res:any)=>{
+        //   console.log(res['지역이름'])
+        // })
 
-//         bars.enter()
-//         .append('text')
-//         .attr('x', (d:any)=>{ return x(d['지역이름'])})
-//         .attr('y', (d:any)=> y(d['확진자수'])-5)
-//         .text((d:any)=> (d['확진자수']))
+        bars.enter()
+        .append('text')
+        .attr('x', (d:any)=>{ return x(d['지역이름'])})
+        .attr('y', (d:any)=> y(d['확진자수'])-5)
+        .text((d:any)=> (d['확진자수']))
 
-//         const xAxis = d3.axisBottom(x);
-//         const yAxis = d3.axisLeft(y);
+        const line: any = d3.line()
+        .x((d:any)=>x(d['지역이름']))
+        .y((d:any)=> y(d['확진자수']))
+        .curve(d3.curveBasis)
 
-//         xAxisG.call(xAxis)
-//         yAxisG.call(yAxis)
+        bars.enter()
+        .append('path')
+        .attr('fill', 'none')
+        .attr('stroke', 'blue')
+        .attr('stroke-width', '2px')
+        .attr('d', line(data))
 
-//         xAxisG.selectAll('text')
-//         .attr('fill', 'blue')
-//       })
-//       .catch(err => console.log(err))
-//   }
+        const xAxis = d3.axisBottom(x);
+        const yAxis = d3.axisLeft(y)
+        .ticks(100);
+
+        xAxisG.call(xAxis)
+        yAxisG.call(yAxis)
+
+        xAxisG.selectAll('text')
+        .attr('fill', 'blue')
+      })
+      .catch(err => console.log(err))
+  }
 
 /**
  * 실전그래프 2
  */
-  constructor() { }
-  ngOnInit() {}
+  // constructor() { }
+  // ngOnInit() {
+
+  // }
 }
