@@ -229,102 +229,186 @@ export class LectureComponent implements OnInit {
   /**
    * 데이터 컨트롤
    * 데이터가 화면에 표시될 때 데이터 정규화 작업이 필요
-   * range - y축
-   * domain - x축
    */
+  // constructor() { }
+  // ngOnInit() {
+  //   /**
+  //   * scalePoint 간격에 맞게 값을 변경해줍니다 (갯수에 따른 간격)
+  //   * range = 전체 width
+  //   * domain = 전체 count를 range 값으로 동일하게 분할하여 분배
+  //   * 
+  //   * padding 여유 간격을 추가
+  //   */
+  //   // const f1 = d3.scalePoint()
+  //   // .range([0,100])
+  //   // .domain(['10', '12','20','30','40'] as any)
+  //   // console.log(f1('12'))
+
+  //   // const f2 = d3.scalePoint()
+  //   // .range([0,100])
+  //   // .domain(['a','b','c','d'] as any)
+  //   // console.log(f2('d'))
+
+  //   // const f3 = d3.scalePoint()
+  //   // .range([0,100])
+  //   // .domain(['a','b','c','d'] as any).padding(0.3)
+  //   // console.log(f3('d'))
+
+  //   /**
+  //    * scaleLinear 비율에 맞게 값을 변경 (비율에 따른 간격)
+  //    * domaine = 변환 전 값
+  //    * range = 변환 후 값의 범위
+  //    */
+  //   // const f1 = d3.scaleLinear()
+  //   //   .range([0, 100])
+  //   //   .domain([0, 500])
+  //   // console.log(f1(1000))
+
+  //   // const f2 = d3.scaleLinear()
+  //   //   .range(['orange','white','green'] as any)
+  //   //   .domain([-1,0 ,1])
+  //   // console.log(f2(-0.5))
+
+  //   // const f3 = d3.scaleLinear()
+  //   // .range([200,500])
+  //   // .domain([20000000, 50000000])
+  //   // console.log(f3(25000000))
+
+  //   /**
+  //    * scaleBand 숫자가 아닌 키 값으로 찾을 수 있게 해줌
+  //    * 
+  //    */
+  //   // const f = d3.scaleBand()
+  //   // .domain(['one', 'two', 'three', 'four'])
+  //   // .range([0,100])
+
+  //   // console.log(f('one'))
+  //   // console.log(f('two'))
+  //   // console.log(f('three'))
+  //   // console.log(f('four'))
+
+  //   // console.log(f.bandwidth())
+
+  //   /**
+  //    * min = 최솟값
+  //    * max = 최댓값
+  //    * extent = [최솟값, 최댓값]
+  //    * mean = 평균값
+  //    */
+  //   // const data1 = [10, 20, 30]
+  //   // const data2 = [{
+  //   //         age:10,
+  //   //         power:3000
+  //   //     },{
+  //   //         age:20,
+  //   //         power:2000
+  //   //     },{
+  //   //         age:30,
+  //   //         power:1000
+  //   //     }]
+
+  //   //     const min1 = d3.min(data1)
+  //   //     const min2 = d3.min(data2, d => d.age)
+  //   //     console.log(min1, min2)
+
+  //   //     const max1 = d3.max(data1)
+  //   //     const max2 = d3.max(data2, d => d.power)
+  //   //     console.log(max1, max2)
+
+  //   //     const extent1 = d3.extent(data1) // return [min, max]
+  //   //     const extent2 = d3.extent(data2, d => d.power) // return [min, max]
+  //   //     console.log(extent1, extent2)
+
+  //   //     let [a, b] = d3.extent(data1)
+  //   //     console.log(a, b)
+
+  //   //     const mean = d3.mean(data1)
+  //   //     console.log(mean)
+  // }
+
+  /** 
+   * 실전 그래프 그리기 
+   * 막대 그래프
+  */
+//   constructor() { }
+//   ngOnInit() {
+//     const canvas = d3.select('.canvas')
+
+//     const width = 800;
+//     const height = 800;
+//     const svg = canvas.append('svg')
+//         .attr('height', height)
+//         .attr('width', width);
+
+//     let [mt, mb, mr, ml] = [50, 50, 50, 50];
+
+//     const graphWidth = width - ml - mr;
+//     const graphHeight = height - mt - mb;
+
+//     const graph = svg. append('g')
+//        .attr('width', graphWidth)
+//        .attr('height', graphHeight)
+//        .attr('transform', `translate(${ml},${mt})`)
+
+//        const xAxisG = graph.append('g')
+//                             .attr('transform', `translate(0, ${graphHeight})`)
+//         const yAxisG = graph.append('g')
+
+//     d3.json("/assets/data/data4.json")
+//       .then((data:any) => {
+//         data.splice(0,1);
+//         console.log(data)
+//         // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+
+//         console.log(data.map((item:any)=>item['지역이름']))
+
+//         const x:any = d3.scaleBand()
+//         .domain(data.map((item:any)=>item['지역이름']))
+//         .range([0, graphWidth])
+//         .padding(0.25)
+
+//         console.log(x('서울'))
+
+//         const y = d3.scaleLinear()
+//         .range([graphHeight, 0])
+//         .domain([0, (d3.max(data,(item:any)=>item['확진자수'])) as any])
+        
+//         const bars = graph.selectAll('rect')
+//         .data(data)
+
+//         bars.enter()
+//         .append('rect')
+//         .attr('height', (d:any)=>graphHeight - y(d.확진자수))
+//         .attr('width', x.bandwidth())
+//         .attr('fill', 'hotpink')
+//         .attr('x', (d:any)=> x(d['지역이름']))
+//         .attr('y', (d:any)=> y(d['확진자수']))
+        
+//         // data.forEach((res:any)=>{
+//         //   console.log(res['지역이름'])
+//         // })
+
+//         bars.enter()
+//         .append('text')
+//         .attr('x', (d:any)=>{ return x(d['지역이름'])})
+//         .attr('y', (d:any)=> y(d['확진자수'])-5)
+//         .text((d:any)=> (d['확진자수']))
+
+//         const xAxis = d3.axisBottom(x);
+//         const yAxis = d3.axisLeft(y);
+
+//         xAxisG.call(xAxis)
+//         yAxisG.call(yAxis)
+
+//         xAxisG.selectAll('text')
+//         .attr('fill', 'blue')
+//       })
+//       .catch(err => console.log(err))
+//   }
+
+/**
+ * 실전그래프 2
+ */
   constructor() { }
-  ngOnInit() {
-    /**
-    * scalePoint 간격에 맞게 값을 변경해줍니다 (갯수에 따른 간격)
-    * range = 전체 width
-    * domain = 전체 count를 range 값으로 동일하게 분할하여 분배
-    * 
-    * padding 여유 간격을 추가
-    */
-    // const f1 = d3.scalePoint()
-    // .range([0,100])
-    // .domain(['10', '12','20','30','40'] as any)
-    // console.log(f1('12'))
-
-    // const f2 = d3.scalePoint()
-    // .range([0,100])
-    // .domain(['a','b','c','d'] as any)
-    // console.log(f2('d'))
-
-    // const f3 = d3.scalePoint()
-    // .range([0,100])
-    // .domain(['a','b','c','d'] as any).padding(0.3)
-    // console.log(f3('d'))
-
-    /**
-     * scaleLinear 비율에 맞게 값을 변경 (비율에 따른 간격)
-     * domaine = 변환 전 값
-     * range = 변환 후 값의 범위
-     */
-    // const f1 = d3.scaleLinear()
-    //   .range([0, 100])
-    //   .domain([0, 500])
-    // console.log(f1(1000))
-
-    // const f2 = d3.scaleLinear()
-    //   .range(['orange','white','green'] as any)
-    //   .domain([-1,0 ,1])
-    // console.log(f2(-0.5))
-
-    // const f3 = d3.scaleLinear()
-    // .range([200,500])
-    // .domain([20000000, 50000000])
-    // console.log(f3(25000000))
-
-    /**
-     * scaleBand 숫자가 아닌 키 값으로 찾을 수 있게 해줌
-     * 
-     */
-    // const f = d3.scaleBand()
-    // .domain(['one', 'two', 'three', 'four'])
-    // .range([0,100])
-
-    // console.log(f('one'))
-    // console.log(f('two'))
-    // console.log(f('three'))
-    // console.log(f('four'))
-
-    // console.log(f.bandwidth())
-
-    /**
-     * min = 최솟값
-     * max = 최댓값
-     * extent = [최솟값, 최댓값]
-     * mean = 평균값
-     */
-    const data1 = [10, 20, 30]
-    const data2 = [{
-            age:10,
-            power:3000
-        },{
-            age:20,
-            power:2000
-        },{
-            age:30,
-            power:1000
-        }]
-
-        const min1 = d3.min(data1)
-        const min2 = d3.min(data2, d => d.age)
-        console.log(min1, min2)
-
-        const max1 = d3.max(data1)
-        const max2 = d3.max(data2, d => d.power)
-        console.log(max1, max2)
-
-        const extent1 = d3.extent(data1) // return [min, max]
-        const extent2 = d3.extent(data2, d => d.power) // return [min, max]
-        console.log(extent1, extent2)
-
-        let [a, b] = d3.extent(data1)
-        console.log(a, b)
-
-        const mean = d3.mean(data1)
-        console.log(mean)
-  }
+  ngOnInit() {}
 }
