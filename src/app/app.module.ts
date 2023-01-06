@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LineComponent } from './line/line.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { LectureComponent } from './lecture/lecture.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LineComponent,
-    RxjsComponent
+    RxjsComponent,
+    LectureComponent
   ],
   imports: [
     BrowserModule
