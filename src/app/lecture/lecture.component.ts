@@ -782,113 +782,279 @@ export class LectureComponent implements OnInit {
   //   console.log(hist(data)[2].length)
   // }
 
+  // /** 
+  //  * 레이아웃
+  //  * _pack - 계층구조의 그림을 그릴 수 있는 데이터를 생성합니다.
+  //  * _hierarchy(stratify) - 계층데이터를 가공합니다
+  //  * circle 형태의 그래프
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const data = [
+  //     { name: '스타트업파이', parent: '' },
+
+  //     { name: 'Education', parent: '스타트업파이' },
+  //     { name: 'Food', parent: '스타트업파이' },
+  //     { name: 'SW', parent: '스타트업파이' },
+  //     { name: 'Healthcare', parent: '스타트업파이' },
+  //     { name: 'E-commerce', parent: '스타트업파이' },
+
+  //     { name: 'a-1', parent: 'Education', size: 3 },
+  //     { name: 'b-1', parent: 'Education', size: 7 },
+  //     { name: 'c-1', parent: 'Education', size: 11 },
+  //     { name: 'd-1', parent: 'Education', size: 5 },
+  //     { name: 'e-1', parent: 'Education', size: 3 },
+  //     { name: 'f-1', parent: 'Education', size: 5 },
+
+  //     { name: 'a-2', parent: 'Food', size: 5 },
+  //     { name: 'b-2', parent: 'Food', size: 4 },
+  //     { name: 'c-2', parent: 'Food', size: 7 },
+  //     { name: 'd-2', parent: 'Food', size: 9 },
+
+  //     { name: 'a-3', parent: 'SW', size: 2 },
+  //     { name: 'b-3', parent: 'SW', size: 10 },
+  //     { name: 'c-3', parent: 'SW', size: 11 },
+  //     { name: 'd-3', parent: 'SW', size: 13 },
+  //     { name: 'e-3', parent: 'SW', size: 4 },
+  //     { name: 'f-3', parent: 'SW', size: 8 },
+
+  //     { name: 'a-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'b-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'c-4', parent: 'Healthcare', size: 4 },
+  //     { name: 'd-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'e-4', parent: 'Healthcare', size: 4 },
+
+  //     { name: 'a-5', parent: 'E-commerce', size: 3 },
+  //     { name: 'b-5', parent: 'E-commerce', size: 7 },
+  //     { name: 'c-5', parent: 'E-commerce', size: 5 },
+  //     { name: 'd-5', parent: 'E-commerce', size: 5 },
+  //   ];
+
+  //   const canvas = d3.select('.canvas')
+  //   const width = 1500;
+  //   const height = 1500;
+  //   const svg = canvas.append('svg')
+  //     .attr('height', height)
+  //     .attr('width', width);
+
+
+  //   const [mt, mr, mb, ml] = [100, 100, 100, 100]
+  //   const margin = { top: 100, right: 100, bottom: 100, left: 100 }
+
+  //   const g = svg.append('g')
+  //     .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+  //   const stratify = d3.stratify()
+  //     .id((d: any) => d.name)
+  //     .parentId((d: any) => d.parent)
+
+  //   console.log(stratify(data))
+
+  //   const Node = stratify(data).sum((d: any) => d.size) // value값을 size 기반으로 생성
+  //   console.log(Node)
+
+  //   const pack = d3.pack()
+  //     .size([1000, 1000])
+  //     .padding(10);
+
+  //   console.log(pack(Node))
+  //   console.log(pack(Node).descendants())
+
+  //   const packData = pack(Node).descendants();
+
+  //   const nodes = g.selectAll('g')
+  //     .data(packData)
+  //     .enter()
+  //     .append('g')
+  //     .attr('transform', (d: any) => `translate(${d.x}, ${d.y})`)
+
+  //   const color = ['pink', 'gray', 'skyblue']
+
+  //   nodes.append('circle')
+  //     .attr('r', (d: any) => d.r)
+  //     .attr('stroke', 'black')
+  //     .attr('stroke-width', '2px')
+  //     .attr('fill', (d:any) => color[d.depth])
+
+
+  //   nodes.filter((d: any) => !d.children)
+  //     .append('text')
+  //     .attr('fill', 'black')
+  //     .text((d: any) => d.data.name)
+  //     .style('font-size', (d: any) => {
+  //       if (d.value <= 5)
+  //         return 16
+  //       else
+  //         return d.value * 4
+  //     })
+  //     .style('color', '#222')
+  //     .attr('text-anchor', 'middle')
+  //     .attr('dy', '10px')
+  // }
+
+  // /**
+  //  * 트리 그래프
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const data = [
+  //     { name: '스타트업파이', parent: '' },
+
+  //     { name: 'Education', parent: '스타트업파이' },
+  //     { name: 'Food', parent: '스타트업파이' },
+  //     { name: 'SW', parent: '스타트업파이' },
+  //     { name: 'Healthcare', parent: '스타트업파이' },
+  //     { name: 'E-commerce', parent: '스타트업파이' },
+
+  //     { name: 'a-1', parent: 'Education', size: 3 },
+  //     { name: 'b-1', parent: 'Education', size: 7 },
+  //     { name: 'c-1', parent: 'Education', size: 11 },
+  //     { name: 'd-1', parent: 'Education', size: 5 },
+  //     { name: 'e-1', parent: 'Education', size: 3 },
+  //     { name: 'f-1', parent: 'Education', size: 5 },
+
+  //     { name: 'a-2', parent: 'Food', size: 5 },
+  //     { name: 'b-2', parent: 'Food', size: 4 },
+  //     { name: 'c-2', parent: 'Food', size: 7 },
+  //     { name: 'd-2', parent: 'Food', size: 9 },
+
+  //     { name: 'a-3', parent: 'SW', size: 2 },
+  //     { name: 'b-3', parent: 'SW', size: 10 },
+  //     { name: 'c-3', parent: 'SW', size: 11 },
+  //     { name: 'd-3', parent: 'SW', size: 13 },
+  //     { name: 'e-3', parent: 'SW', size: 4 },
+  //     { name: 'f-3', parent: 'SW', size: 8 },
+
+  //     { name: 'a-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'b-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'c-4', parent: 'Healthcare', size: 4 },
+  //     { name: 'd-4', parent: 'Healthcare', size: 3 },
+  //     { name: 'e-4', parent: 'Healthcare', size: 4 },
+
+  //     { name: 'a-5', parent: 'E-commerce', size: 3 },
+  //     { name: 'b-5', parent: 'E-commerce', size: 7 },
+  //     { name: 'c-5', parent: 'E-commerce', size: 5 },
+  //     { name: 'd-5', parent: 'E-commerce', size: 5 },
+  //   ];
+
+  //   const canvas = d3.select('.canvas')
+  //   const width = 5000;
+  //   const height = 5000;
+  //   const svg = canvas.append('svg')
+  //     .attr('height', height)
+  //     .attr('width', width);
+
+
+  //   const [mt, mr, mb, ml] = [100, 100, 100, 100]
+  //   const margin = { top: 100, right: 100, bottom: 100, left: 100 }
+
+  //   const g = svg.append('g')
+  //     .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+  //   const stratify = d3.stratify()
+  //     .id((d: any) => d.name)
+  //     .parentId((d: any) => d.parent)
+
+  //   console.log(stratify(data))
+
+  //   const node = stratify(data).sum((d: any) => d.size) // value값을 size 기반으로 생성
+  //   console.log(node)
+
+  //   const tree = d3.tree()
+  //     .size([5000, 5000])
+
+  //   console.log(tree(node))
+  //   console.log(tree(node).descendants())
+
+  //   const treeData = tree(node).descendants()
+
+  //   const nodes = g.selectAll('g')
+  //     .data(treeData)
+  //     .enter()
+  //     .append('g')
+  //     .attr('transform', (d: any) => `translate(${d.x/3}, ${d.y/5})`)
+
+  //   nodes.append('text')
+  //   .attr('fill','black')
+  //   .attr('text-anchor', 'middle')
+  //   .text((d:any)=>d.data.name)
+
+  //   nodes.filter((d:any) => d.children)
+  //   .append('rect')
+  //   .attr('height', 30)
+  //   .attr('width', 120)
+  //   .attr('stroke', 'black')
+  //   .attr('stroke-width', 2)
+  //   .attr('fill', 'none')
+  //   .attr('x', -60)
+  //   .attr('y', -20)
+
+  //   const links = g.selectAll('.link').data(tree(node).links())
+
+  //   links.enter()
+  //   .append('path')
+  //   .attr('stroke', 'black')
+  //   .attr('stroke-width', 2)
+  //   .attr('fill', 'none')
+  //   .attr('d', (d3.linkVertical().x((d:any)=>d.x/3).y((d:any)=>d.y/5)) as any)
+
+  // }
+
   /** 
-   * 레이아웃
-   * _pack - 계층구조의 그림을 그릴 수 있는 데이터를 생성합니다.
-   * _hierarchy(stratify) - 계층데이터를 가공합니다
-   * circle 형태의 그래프
+   * 지리데이터
+   * mouseover
+   * mouseout
    */
   constructor() { }
   ngOnInit() {
-    const data = [
-      { name: '스타트업파이', parent: '' },
+    const canvas = d3.select('.canvas');
 
-      { name: 'Education', parent: '스타트업파이' },
-      { name: 'Food', parent: '스타트업파이' },
-      { name: 'SW', parent: '스타트업파이' },
-      { name: 'Healthcare', parent: '스타트업파이' },
-      { name: 'E-commerce', parent: '스타트업파이' },
-
-      { name: 'a-1', parent: 'Education', size: 3 },
-      { name: 'b-1', parent: 'Education', size: 7 },
-      { name: 'c-1', parent: 'Education', size: 11 },
-      { name: 'd-1', parent: 'Education', size: 5 },
-      { name: 'e-1', parent: 'Education', size: 3 },
-      { name: 'f-1', parent: 'Education', size: 5 },
-
-      { name: 'a-2', parent: 'Food', size: 5 },
-      { name: 'b-2', parent: 'Food', size: 4 },
-      { name: 'c-2', parent: 'Food', size: 7 },
-      { name: 'd-2', parent: 'Food', size: 9 },
-
-      { name: 'a-3', parent: 'SW', size: 2 },
-      { name: 'b-3', parent: 'SW', size: 10 },
-      { name: 'c-3', parent: 'SW', size: 11 },
-      { name: 'd-3', parent: 'SW', size: 13 },
-      { name: 'e-3', parent: 'SW', size: 4 },
-      { name: 'f-3', parent: 'SW', size: 8 },
-
-      { name: 'a-4', parent: 'Healthcare', size: 3 },
-      { name: 'b-4', parent: 'Healthcare', size: 3 },
-      { name: 'c-4', parent: 'Healthcare', size: 4 },
-      { name: 'd-4', parent: 'Healthcare', size: 3 },
-      { name: 'e-4', parent: 'Healthcare', size: 4 },
-
-      { name: 'a-5', parent: 'E-commerce', size: 3 },
-      { name: 'b-5', parent: 'E-commerce', size: 7 },
-      { name: 'c-5', parent: 'E-commerce', size: 5 },
-      { name: 'd-5', parent: 'E-commerce', size: 5 },
-    ];
-
-    const canvas = d3.select('.canvas')
-    const width = 1500;
-    const height = 1500;
+    const width = 5000;
+    const height = 5000;
     const svg = canvas.append('svg')
-      .attr('height', height)
-      .attr('width', width);
+                      .attr('width', width)
+                      .attr('height', height)
 
+    const initialScale = 5500;
+    const initialX =  -11900;
+    const initialY = 4050;
 
-    const [mt, mr, mb, ml] = [100, 100, 100, 100]
-    const margin = { top: 100, right: 100, bottom: 100, left: 100 }
+    const projection = d3.geoMercator()
+    .scale(initialScale)
+    .translate([initialX, initialY])
 
     const g = svg.append('g')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-    const stratify = d3.stratify()
-      .id((d: any) => d.name)
-      .parentId((d: any) => d.parent)
+    d3.json("/assets/geo/korea.json")
+    .then((json:any)=>{
+      console.log(json)
+      // console.log(json.features[0].geometry.coordinates[0][1][1])
+      g.selectAll('path')
+       .data(json.features)
+       .enter()
+       .append('path')
+       .attr('d', d3.geoPath().projection(projection) as any)
+       .attr('fill', '#aaa')
+       .attr('stroke', 'white')
+       .attr('stroke-width', 1)
+       .on('mouseover',function(){d3.select(this).attr("fill","red");})
+       .on("mouseout",function(){d3.select(this).attr("fill","#aaa");})
+      //  .attr('class', 'countries')
 
-    console.log(stratify(data))
-
-    const Node = stratify(data).sum((d: any) => d.size) // value값을 size 기반으로 생성
-    console.log(Node)
-
-    const pack = d3.pack()
-      .size([1000, 1000])
-      .padding(10);
-
-    console.log(pack(Node))
-    console.log(pack(Node).descendants())
-
-    const packData = pack(Node).descendants();
-
-    const nodes = g.selectAll('g')
-      .data(packData)
-      .enter()
-      .append('g')
-      .attr('transform', (d: any) => `translate(${d.x}, ${d.y})`)
-
-    const color = ['pink', 'gray', 'skyblue']
-
-    nodes.append('circle')
-      .attr('r', (d: any) => d.r)
-      .attr('stroke', 'black')
-      .attr('stroke-width', '2px')
-      .attr('fill', (d:any) => color[d.depth])
-
-
-    nodes.filter((d: any) => !d.children)
-      .append('text')
-      .attr('fill', 'black')
-      .text((d: any) => d.data.name)
-      .style('font-size', (d: any) => {
-        if (d.value <= 5)
-          return 16
-        else
-          return d.value * 4
-      })
-      .style('color', '#222')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '10px')
+      g.selectAll('text')
+            .data(json.features)
+            .enter()
+            .append('text')
+            .attr('transform', (d:any)=>{
+              let locate = d3.geoPath().projection(projection).centroid(d);
+              //centroid = 각각의 경로의 중심좌표
+              // console.log(locate)
+              return `translate(${locate[0]}, ${locate[1]})`
+            })
+            .text((d:any)=>d.properties.name)
+            // .text((d:any)=>d.properties.adm_nm)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'orange')
+    })
   }
 }
