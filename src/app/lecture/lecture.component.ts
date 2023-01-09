@@ -517,161 +517,378 @@ export class LectureComponent implements OnInit {
   // .attr('d', f)
   // }
 
+  // /** 
+  //  * 컴포넌트 브러쉬, 줌
+  // */
+  // constructor() { }
+  // ngOnInit() {
+  //   const canvas = d3.select('.canvas')
+
+  //   const width = 800;
+  //   const height = 800;
+  //   const svg = canvas.append('svg')
+  //     .attr('height', height)
+  //     .attr('width', width);
+
+  //   let [mt, mb, mr, ml] = [50, 50, 50, 50];
+
+  //   const graphWidth = width - ml - mr;
+  //   const graphHeight = height - mt - mb;
+
+  //   // /**
+  //   //  * 브러쉬 시작
+  //   //  */
+  //   // const brush = d3.brush()
+  //   //   .on("start brush end", brushed);
+
+
+  //   //   function brushed({selection} :any) {
+  //   //     let value:any = [];
+  //   //     if (selection) {
+  //   //       const [[x0, y0], [x1, y1]] = selection;
+  //   //       /**
+  //   //        * 브러쉬 내부 데이터 값에 대한 설정을 위한 옵션?
+  //   //        */
+  //   //       // value = dot
+  //   //       //   .style("stroke", "gray")
+  //   //       //   .filter((d:any) => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
+  //   //       //   .style("stroke", "steelblue")
+  //   //       //   .data();
+  //   //     } else {
+  //   //       // dot.style("stroke", "steelblue");
+  //   //     }
+  //   //     svg.property("value", value).dispatch("input");
+  //   //   }
+
+  //   //   svg.call(brush as any);
+  //   // /** 브러쉬 끝 */
+
+  //   const graph = svg.append('g')
+  //     .attr('width', graphWidth)
+  //     .attr('height', graphHeight)
+  //     .attr('transform', `translate(${ml},${mt})`)
+
+  //   const xAxisG = graph.append('g')
+  //     .attr('transform', `translate(0, ${graphHeight})`)
+  //   const yAxisG = graph.append('g')
+
+  //   d3.json("/assets/data/data4.json")
+  //     .then((data: any) => {
+  //       data.splice(0, 1);
+  //       console.log(data)
+  //       // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
+
+  //       console.log(data.map((item: any) => item['지역이름']))
+
+  //       const x: any = d3.scaleBand()
+  //         .domain(data.map((item: any) => item['지역이름']))
+  //         .range([0, graphWidth])
+  //         .padding(0.25)
+
+  //       console.log(x('서울'))
+
+  //       const y = d3.scaleLinear()
+  //         .range([graphHeight, 0])
+  //         .domain([0, (d3.max(data, (item: any) => item['확진자수'])) as any])
+
+  //       const bars = graph.selectAll('rect')
+  //         .data(data)
+
+  //       bars.enter()
+  //         .append('rect')
+  //         .attr('height', (d: any) => graphHeight - y(d.확진자수))
+  //         .attr('width', x.bandwidth())
+  //         .attr('fill', 'hotpink')
+  //         .attr('x', (d: any) => x(d['지역이름']))
+  //         .attr('y', (d: any) => y(d['확진자수']))
+
+  //       // data.forEach((res:any)=>{
+  //       //   console.log(res['지역이름'])
+  //       // })
+
+  //       bars.enter()
+  //         .append('circle')
+  //         .attr('width', x.bandwidth())
+  //         .attr('fill', 'red')
+  //         .attr('cx', (d: any) => x(d['지역이름']) + 15)
+  //         .attr('cy', (d: any) => y(d['확진자수']))
+  //         .attr('r', (d: any) => d.확진자수 / 50)
+
+  //       bars.enter()
+  //         .append('text')
+  //         .attr('x', (d: any) => { return x(d['지역이름']) })
+  //         .attr('y', (d: any) => y(d['확진자수']) - 5)
+  //         .text((d: any) => (d['확진자수']))
+
+  //       /**
+  //        * 라인그래프 추가 
+  //        */
+  //       const line: any = d3.line()
+  //         .x((d: any) => x(d['지역이름']))
+  //         .y((d: any) => y(d['확진자수']))
+  //         .curve(d3.curveBasis)
+
+  //       bars.enter()
+  //         .append('path')
+  //         .attr('fill', 'none')
+  //         .attr('stroke', 'blue')
+  //         .attr('stroke-width', '2px')
+  //         .attr('d', line(data))
+
+  //       const xAxis = d3.axisBottom(x);
+  //       const yAxis = d3.axisLeft(y)
+  //         .ticks(100);
+
+  //       xAxisG.call(xAxis)
+  //       yAxisG.call(yAxis)
+
+  //       xAxisG.selectAll('text')
+  //         .attr('fill', 'blue')
+
+  //       /**
+  //    * 줌 시작
+  //    */
+  //       const delaunay:any = d3.Delaunay.from(data, (d: any) => x(d[0]), d => y(d[1]));
+
+  //       let transform:any;
+
+  //       const zoom: any = d3.zoom().on("zoom", e => {
+  //         graph.attr("transform", (transform = e.transform));
+  //         graph.style("stroke-width", 3 / Math.sqrt(transform.k));
+  //         bars.attr("r", 3 / Math.sqrt(transform.k));
+  //       });
+
+  //       svg
+  //         .call(zoom)
+  //         .call(zoom.transform, d3.zoomIdentity)
+  //         .on("pointermove", event => {
+  //           const p = transform.invert(d3.pointer(event));
+  //           const i = delaunay.find(...p);
+  //           bars.classed("highlighted", (_, j) => i === j);
+  //           d3.select(bars.nodes()[i]).raise();
+  //         })
+
+  //       /**
+  //        * 줌 끝
+  //        */
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
+  // /** 
+  //  * 레이아웃 pie 
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const canvas = d3.select('.canvas')
+
+  //   const width = 1000;
+  //   const height = 1000;
+  //   const svg = canvas.append('svg')
+  //     .attr('height', height)
+  //     .attr('width', width);
+
+  //   const g = svg.append('g')
+  //     .attr('transform', 'translate(100,100)');
+
+  //   const data = [50, 150, 100, 200];
+
+  //   const pie = d3.pie()
+  //     .sort((a: any, b: any) => b - a)
+  //     .value((d: any) => d)
+
+  //   console.log(pie(data))
+
+  // //   const data = [
+  // //     {
+  // //         "data": 50,
+  // //         "index": 3,
+  // //         "value": 50,
+  // //         "startAngle": 5.654866776461628,
+  // //         "endAngle": 6.283185307179586,
+  // //         "padAngle": 0
+  // //     },
+  // //     {
+  // //         "data": 150,
+  // //         "index": 1,
+  // //         "value": 150,
+  // //         "startAngle": 2.5132741228718345,
+  // //         "endAngle": 4.39822971502571,
+  // //         "padAngle": 0
+  // //     },
+  // //     {
+  // //         "data": 100,
+  // //         "index": 2,
+  // //         "value": 100,
+  // //         "startAngle": 4.39822971502571,
+  // //         "endAngle": 5.654866776461628,
+  // //         "padAngle": 0
+  // //     },
+  // //     {
+  // //         "data": 200,
+  // //         "index": 0,
+  // //         "value": 200,
+  // //         "startAngle": 0,
+  // //         "endAngle": 2.5132741228718345,
+  // //         "padAngle": 0
+  // //     }
+  // // ]
+
+  // const f:any = d3.arc()
+  // .innerRadius(0)
+  // .outerRadius(50)
+
+  // g.selectAll('path')
+  // .data(pie(data))
+  // // .data(data)
+  // .enter()
+  // .append('path')
+  // .attr('fill','pink')
+  // .attr('stroke', 'blue')
+  // .attr('stroke-width','2px')
+  // .attr('d', f)
+
+  // // g.selectAll('path')
+  // // .data(pie(data))
+  // // .enter()
+  // // .append('path')
+  // // .attr('fill', 'pink')
+  // // .attr('stroke', 'blue')
+  // // .attr('stroke-width', '2px')
+  // // // .attr('d', f(data))
+  // // .attr('d', f)
+  // }
+
+  // /**
+  //  * 레이아웃 히스토그램
+  //  * 데이터값을 해당 값에 따른 배열로 만들어주며, 갯수 확인도 가능
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const data = [10, 10, 20, 20, 30, 30, 30, 30, 30, 40, 40, 50, 50, 60, 60, 60, 60, 60, 60, 60];
+
+  //   // 히스토그램
+  //   const hist = d3.histogram()
+  //   console.log(hist(data))
+
+  //   //새로 나온 버전
+  //   const bin = d3.bin()
+  //   console.log(bin(data))
+
+  //   for(const i of hist(data)[2]){
+  //     console.log(i)
+  //   }
+
+  //   console.log(hist(data)[2].length)
+  // }
+
   /** 
-   * 컴포넌트 브러쉬
-  */
+   * 레이아웃
+   * _pack - 계층구조의 그림을 그릴 수 있는 데이터를 생성합니다.
+   * _hierarchy(stratify) - 계층데이터를 가공합니다
+   * circle 형태의 그래프
+   */
   constructor() { }
   ngOnInit() {
-    const canvas = d3.select('.canvas')
+    const data = [
+      { name: '스타트업파이', parent: '' },
 
-    const width = 800;
-    const height = 800;
+      { name: 'Education', parent: '스타트업파이' },
+      { name: 'Food', parent: '스타트업파이' },
+      { name: 'SW', parent: '스타트업파이' },
+      { name: 'Healthcare', parent: '스타트업파이' },
+      { name: 'E-commerce', parent: '스타트업파이' },
+
+      { name: 'a-1', parent: 'Education', size: 3 },
+      { name: 'b-1', parent: 'Education', size: 7 },
+      { name: 'c-1', parent: 'Education', size: 11 },
+      { name: 'd-1', parent: 'Education', size: 5 },
+      { name: 'e-1', parent: 'Education', size: 3 },
+      { name: 'f-1', parent: 'Education', size: 5 },
+
+      { name: 'a-2', parent: 'Food', size: 5 },
+      { name: 'b-2', parent: 'Food', size: 4 },
+      { name: 'c-2', parent: 'Food', size: 7 },
+      { name: 'd-2', parent: 'Food', size: 9 },
+
+      { name: 'a-3', parent: 'SW', size: 2 },
+      { name: 'b-3', parent: 'SW', size: 10 },
+      { name: 'c-3', parent: 'SW', size: 11 },
+      { name: 'd-3', parent: 'SW', size: 13 },
+      { name: 'e-3', parent: 'SW', size: 4 },
+      { name: 'f-3', parent: 'SW', size: 8 },
+
+      { name: 'a-4', parent: 'Healthcare', size: 3 },
+      { name: 'b-4', parent: 'Healthcare', size: 3 },
+      { name: 'c-4', parent: 'Healthcare', size: 4 },
+      { name: 'd-4', parent: 'Healthcare', size: 3 },
+      { name: 'e-4', parent: 'Healthcare', size: 4 },
+
+      { name: 'a-5', parent: 'E-commerce', size: 3 },
+      { name: 'b-5', parent: 'E-commerce', size: 7 },
+      { name: 'c-5', parent: 'E-commerce', size: 5 },
+      { name: 'd-5', parent: 'E-commerce', size: 5 },
+    ];
+
+    const canvas = d3.select('.canvas')
+    const width = 1500;
+    const height = 1500;
     const svg = canvas.append('svg')
       .attr('height', height)
       .attr('width', width);
 
-    let [mt, mb, mr, ml] = [50, 50, 50, 50];
 
-    const graphWidth = width - ml - mr;
-    const graphHeight = height - mt - mb;
+    const [mt, mr, mb, ml] = [100, 100, 100, 100]
+    const margin = { top: 100, right: 100, bottom: 100, left: 100 }
 
-    // /**
-    //  * 브러쉬 시작
-    //  */
-    // const brush = d3.brush()
-    //   .on("start brush end", brushed);
+    const g = svg.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    const stratify = d3.stratify()
+      .id((d: any) => d.name)
+      .parentId((d: any) => d.parent)
+
+    console.log(stratify(data))
+
+    const Node = stratify(data).sum((d: any) => d.size) // value값을 size 기반으로 생성
+    console.log(Node)
+
+    const pack = d3.pack()
+      .size([1000, 1000])
+      .padding(10);
+
+    console.log(pack(Node))
+    console.log(pack(Node).descendants())
+
+    const packData = pack(Node).descendants();
+
+    const nodes = g.selectAll('g')
+      .data(packData)
+      .enter()
+      .append('g')
+      .attr('transform', (d: any) => `translate(${d.x}, ${d.y})`)
+
+    const color = ['pink', 'gray', 'skyblue']
+
+    nodes.append('circle')
+      .attr('r', (d: any) => d.r)
+      .attr('stroke', 'black')
+      .attr('stroke-width', '2px')
+      .attr('fill', (d:any) => color[d.depth])
 
 
-    //   function brushed({selection} :any) {
-    //     let value:any = [];
-    //     if (selection) {
-    //       const [[x0, y0], [x1, y1]] = selection;
-    //       /**
-    //        * 브러쉬 내부 데이터 값에 대한 설정을 위한 옵션?
-    //        */
-    //       // value = dot
-    //       //   .style("stroke", "gray")
-    //       //   .filter((d:any) => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
-    //       //   .style("stroke", "steelblue")
-    //       //   .data();
-    //     } else {
-    //       // dot.style("stroke", "steelblue");
-    //     }
-    //     svg.property("value", value).dispatch("input");
-    //   }
-
-    //   svg.call(brush as any);
-    // /** 브러쉬 끝 */
-
-    const graph = svg.append('g')
-      .attr('width', graphWidth)
-      .attr('height', graphHeight)
-      .attr('transform', `translate(${ml},${mt})`)
-
-    const xAxisG = graph.append('g')
-      .attr('transform', `translate(0, ${graphHeight})`)
-    const yAxisG = graph.append('g')
-
-    d3.json("/assets/data/data4.json")
-      .then((data: any) => {
-        data.splice(0, 1);
-        console.log(data)
-        // 이런 식으로 추가를 해줍니다. 다음 예제에서 사용해봅니다.
-
-        console.log(data.map((item: any) => item['지역이름']))
-
-        const x: any = d3.scaleBand()
-          .domain(data.map((item: any) => item['지역이름']))
-          .range([0, graphWidth])
-          .padding(0.25)
-
-        console.log(x('서울'))
-
-        const y = d3.scaleLinear()
-          .range([graphHeight, 0])
-          .domain([0, (d3.max(data, (item: any) => item['확진자수'])) as any])
-
-        const bars = graph.selectAll('rect')
-          .data(data)
-
-        bars.enter()
-          .append('rect')
-          .attr('height', (d: any) => graphHeight - y(d.확진자수))
-          .attr('width', x.bandwidth())
-          .attr('fill', 'hotpink')
-          .attr('x', (d: any) => x(d['지역이름']))
-          .attr('y', (d: any) => y(d['확진자수']))
-
-        // data.forEach((res:any)=>{
-        //   console.log(res['지역이름'])
-        // })
-
-        bars.enter()
-          .append('circle')
-          .attr('width', x.bandwidth())
-          .attr('fill', 'red')
-          .attr('cx', (d: any) => x(d['지역이름']) + 15)
-          .attr('cy', (d: any) => y(d['확진자수']))
-          .attr('r', (d: any) => d.확진자수 / 50)
-
-        bars.enter()
-          .append('text')
-          .attr('x', (d: any) => { return x(d['지역이름']) })
-          .attr('y', (d: any) => y(d['확진자수']) - 5)
-          .text((d: any) => (d['확진자수']))
-
-        /**
-         * 라인그래프 추가 
-         */
-        const line: any = d3.line()
-          .x((d: any) => x(d['지역이름']))
-          .y((d: any) => y(d['확진자수']))
-          .curve(d3.curveBasis)
-
-        bars.enter()
-          .append('path')
-          .attr('fill', 'none')
-          .attr('stroke', 'blue')
-          .attr('stroke-width', '2px')
-          .attr('d', line(data))
-
-        const xAxis = d3.axisBottom(x);
-        const yAxis = d3.axisLeft(y)
-          .ticks(100);
-
-        xAxisG.call(xAxis)
-        yAxisG.call(yAxis)
-
-        xAxisG.selectAll('text')
-          .attr('fill', 'blue')
-
-        /**
-     * 줌 시작
-     */
-        const delaunay:any = d3.Delaunay.from(data, (d: any) => x(d[0]), d => y(d[1]));
-
-        let transform:any;
-
-        const zoom: any = d3.zoom().on("zoom", e => {
-          graph.attr("transform", (transform = e.transform));
-          graph.style("stroke-width", 3 / Math.sqrt(transform.k));
-          bars.attr("r", 3 / Math.sqrt(transform.k));
-        });
-
-        svg
-          .call(zoom)
-          .call(zoom.transform, d3.zoomIdentity)
-          .on("pointermove", event => {
-            const p = transform.invert(d3.pointer(event));
-            const i = delaunay.find(...p);
-            bars.classed("highlighted", (_, j) => i === j);
-            d3.select(bars.nodes()[i]).raise();
-          })
-
-        /**
-         * 줌 끝
-         */
+    nodes.filter((d: any) => !d.children)
+      .append('text')
+      .attr('fill', 'black')
+      .text((d: any) => d.data.name)
+      .style('font-size', (d: any) => {
+        if (d.value <= 5)
+          return 16
+        else
+          return d.value * 4
       })
-      .catch(err => console.log(err))
+      .style('color', '#222')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '10px')
   }
 }
