@@ -1000,61 +1000,93 @@ export class LectureComponent implements OnInit {
 
   // }
 
+  // /** 
+  //  * 지리데이터
+  //  * mouseover
+  //  * mouseout
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const canvas = d3.select('.canvas');
+
+  //   const width = 5000;
+  //   const height = 5000;
+  //   const svg = canvas.append('svg')
+  //                     .attr('width', width)
+  //                     .attr('height', height)
+
+  //   const initialScale = 5500;
+  //   const initialX =  -11900;
+  //   const initialY = 4050;
+
+  //   const projection = d3.geoMercator()
+  //   .scale(initialScale)
+  //   .translate([initialX, initialY])
+
+  //   const g = svg.append('g')
+
+  //   d3.json("/assets/geo/korea.json")
+  //   .then((json:any)=>{
+  //     console.log(json)
+  //     // console.log(json.features[0].geometry.coordinates[0][1][1])
+  //     g.selectAll('path')
+  //      .data(json.features)
+  //      .enter()
+  //      .append('path')
+  //      .attr('d', d3.geoPath().projection(projection) as any)
+  //      .attr('fill', '#aaa')
+  //      .attr('stroke', 'white')
+  //      .attr('stroke-width', 1)
+  //      .on('mouseover',function(){d3.select(this).attr("fill","red");})
+  //      .on("mouseout",function(){d3.select(this).attr("fill","#aaa");})
+  //     //  .attr('class', 'countries')
+
+  //     g.selectAll('text')
+  //           .data(json.features)
+  //           .enter()
+  //           .append('text')
+  //           .attr('transform', (d:any)=>{
+  //             let locate = d3.geoPath().projection(projection).centroid(d);
+  //             //centroid = 각각의 경로의 중심좌표
+  //             // console.log(locate)
+  //             return `translate(${locate[0]}, ${locate[1]})`
+  //           })
+  //           .text((d:any)=>d.properties.name)
+  //           // .text((d:any)=>d.properties.adm_nm)
+  //           .attr('text-anchor', 'middle')
+  //           .attr('fill', 'orange')
+  //   })
+  // }
+
   /** 
-   * 지리데이터
-   * mouseover
-   * mouseout
+   * 상호작용
+   * click - 사용자 클릭이벤트
+   * mouseover - 마우스 in
+   * mouseout - 마우스 out
    */
   constructor() { }
   ngOnInit() {
-    const canvas = d3.select('.canvas');
+    const h2 = d3.select('h2')
 
-    const width = 5000;
-    const height = 5000;
-    const svg = canvas.append('svg')
-                      .attr('width', width)
-                      .attr('height', height)
+    const tooltip = d3.select('.canvas').append('div')
+    
+    h2.on('click', 함수)
+    // h2.on('mouseover', 경고)
+    // h2.on('mouseout', 경고)
 
-    const initialScale = 5500;
-    const initialX =  -11900;
-    const initialY = 4050;
+    function 경고() {
+      alert('경고')
+    }
 
-    const projection = d3.geoMercator()
-    .scale(initialScale)
-    .translate([initialX, initialY])
+    function 함수(e:any){
+      console.log(e)
+      // console.log(this)
+      // console.log(this.innerText)
 
-    const g = svg.append('g')
-
-    d3.json("/assets/geo/korea.json")
-    .then((json:any)=>{
-      console.log(json)
-      // console.log(json.features[0].geometry.coordinates[0][1][1])
-      g.selectAll('path')
-       .data(json.features)
-       .enter()
-       .append('path')
-       .attr('d', d3.geoPath().projection(projection) as any)
-       .attr('fill', '#aaa')
-       .attr('stroke', 'white')
-       .attr('stroke-width', 1)
-       .on('mouseover',function(){d3.select(this).attr("fill","red");})
-       .on("mouseout",function(){d3.select(this).attr("fill","#aaa");})
-      //  .attr('class', 'countries')
-
-      g.selectAll('text')
-            .data(json.features)
-            .enter()
-            .append('text')
-            .attr('transform', (d:any)=>{
-              let locate = d3.geoPath().projection(projection).centroid(d);
-              //centroid = 각각의 경로의 중심좌표
-              // console.log(locate)
-              return `translate(${locate[0]}, ${locate[1]})`
-            })
-            .text((d:any)=>d.properties.name)
-            // .text((d:any)=>d.properties.adm_nm)
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'orange')
-    })
+      tooltip
+            .text('hello')
+            .attr('class', 'tooltip')
+            .attr('style', `position:absolute; background:gray;top:${e.y}px; left:${e.x}px;`)
+    }
   }
 }
