@@ -9,8 +9,8 @@ import { curveBasis } from 'd3';
 })
 
 export class LectureComponent implements OnInit {
-  // constructor() { }
-  // ngOnInit() {}
+  constructor() { }
+  ngOnInit() {}
   /**
    * 막대그래프 샘플 예제
    */
@@ -327,10 +327,10 @@ export class LectureComponent implements OnInit {
   //   //     console.log(mean)
   // }
 
-  /** 
-   * 실전 그래프 그리기 
-   * 막대 그래프
-  */
+  // /** 
+  //  * 실전 그래프 그리기 
+  //  * 막대 그래프
+  // */
   // constructor() { }
   // ngOnInit() {
   //   const canvas = d3.select('.canvas')
@@ -517,9 +517,9 @@ export class LectureComponent implements OnInit {
   // .attr('d', f)
   // }
 
-  // /** 
-  //  * 컴포넌트 브러쉬, 줌
-  // */
+  /** 
+   * 컴포넌트 브러쉬, 줌
+  */
   // constructor() { }
   // ngOnInit() {
   //   const canvas = d3.select('.canvas')
@@ -538,29 +538,29 @@ export class LectureComponent implements OnInit {
   //   // /**
   //   //  * 브러쉬 시작
   //   //  */
-  //   // const brush = d3.brush()
-  //   //   .on("start brush end", brushed);
+  //   const brush = d3.brush()
+  //     .on("start brush end", brushed);
 
 
-  //   //   function brushed({selection} :any) {
-  //   //     let value:any = [];
-  //   //     if (selection) {
-  //   //       const [[x0, y0], [x1, y1]] = selection;
-  //   //       /**
-  //   //        * 브러쉬 내부 데이터 값에 대한 설정을 위한 옵션?
-  //   //        */
-  //   //       // value = dot
-  //   //       //   .style("stroke", "gray")
-  //   //       //   .filter((d:any) => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
-  //   //       //   .style("stroke", "steelblue")
-  //   //       //   .data();
-  //   //     } else {
-  //   //       // dot.style("stroke", "steelblue");
-  //   //     }
-  //   //     svg.property("value", value).dispatch("input");
-  //   //   }
+  //     function brushed({selection} :any) {
+  //       let value:any = [];
+  //       if (selection) {
+  //         const [[x0, y0], [x1, y1]] = selection;
+  //         /**
+  //          * 브러쉬 내부 데이터 값에 대한 설정을 위한 옵션?
+  //          */
+  //         // value = dot
+  //         //   .style("stroke", "gray")
+  //         //   .filter((d:any) => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
+  //         //   .style("stroke", "steelblue")
+  //         //   .data();
+  //       } else {
+  //         // dot.style("stroke", "steelblue");
+  //       }
+  //       svg.property("value", value).dispatch("input");
+  //     }
 
-  //   //   svg.call(brush as any);
+  //     svg.call(brush as any);
   //   // /** 브러쉬 끝 */
 
   //   const graph = svg.append('g')
@@ -1090,216 +1090,218 @@ export class LectureComponent implements OnInit {
   //   }
   // }
 
-  /** 
-   * d3 네트워크 그래프 
-   * force-directed graph, 힘 방향 그래프
-   */
-  constructor() { }
-  ngOnInit() {
-    const nodes = [ // nodes는 요소 자체에 대한 정보를 담고 있습니다.
-      {
-        "id": "a사",
-        "직원수": 11,
-        "유형": "주식회사"
-      },
-      {
-        "id": "b사",
-        "직원수": 8,
-        "유형": "학원"
-      },
-      {
-        "id": "c사",
-        "직원수": 7,
-        "유형": "연구원"
-      },
-      {
-        "id": "d사",
-        "직원수": 7,
-        "유형": "출판사"
-      },
-      {
-        "id": "e사",
-        "직원수": 32,
-        "유형": "주식회사"
-      },
-      {
-        "id": "f사",
-        "직원수": 11,
-        "유형": "주식회사"
-      }
-    ]
+  // /** 
+  //  * d3 네트워크 그래프 
+  //  * force-directed graph, 힘 방향 그래프
+  //  */
+  // constructor() { }
+  // ngOnInit() {
+  //   const nodes = [ // nodes는 요소 자체에 대한 정보를 담고 있습니다.
+  //     {
+  //       "id": "a사",
+  //       "직원수": 11,
+  //       "유형": "주식회사"
+  //     },
+  //     {
+  //       "id": "b사",
+  //       "직원수": 8,
+  //       "유형": "학원"
+  //     },
+  //     {
+  //       "id": "c사",
+  //       "직원수": 7,
+  //       "유형": "연구원"
+  //     },
+  //     {
+  //       "id": "d사",
+  //       "직원수": 7,
+  //       "유형": "출판사"
+  //     },
+  //     {
+  //       "id": "e사",
+  //       "직원수": 32,
+  //       "유형": "주식회사"
+  //     },
+  //     {
+  //       "id": "f사",
+  //       "직원수": 11,
+  //       "유형": "주식회사"
+  //     }
+  //   ]
 
-    const links = [ // links는 연결에 대한 정보를 담고 있습니다.
-      {
-        "source": "a사",
-        "target": "b사",
-        "거리": 8
-      },
-      {
-        "source": "a사",
-        "target": "c사",
-        "거리": 9
-      },
-      {
-        "source": "a사",
-        "target": "d사",
-        "거리": 9
-      },
-      {
-        "source": "a사",
-        "target": "e사",
-        "거리": 8
-      },
-      {
-        "source": "a사",
-        "target": "f사",
-        "거리": 8
-      },
-      // 분할
-      {
-        "source": "b사",
-        "target": "c사",
-        "거리": 3
-      },
-      {
-        "source": "b사",
-        "target": "d사",
-        "거리": 4
-      },
-      {
-        "source": "b사",
-        "target": "e사",
-        "거리": 4
-      },
-      {
-        "source": "b사",
-        "target": "f사",
-        "거리": 5
-      },
-      // 분할
-      {
-        "source": "d사",
-        "target": "e사",
-        "거리": 3
-      },
-      {
-        "source": "d사",
-        "target": "f사",
-        "거리": 3
-      }
-    ]
+  //   const links = [ // links는 연결에 대한 정보를 담고 있습니다.
+  //     {
+  //       "source": "a사",
+  //       "target": "b사",
+  //       "거리": 8
+  //     },
+  //     {
+  //       "source": "a사",
+  //       "target": "c사",
+  //       "거리": 9
+  //     },
+  //     {
+  //       "source": "a사",
+  //       "target": "d사",
+  //       "거리": 9
+  //     },
+  //     {
+  //       "source": "a사",
+  //       "target": "e사",
+  //       "거리": 8
+  //     },
+  //     {
+  //       "source": "a사",
+  //       "target": "f사",
+  //       "거리": 8
+  //     },
+  //     // 분할
+  //     {
+  //       "source": "b사",
+  //       "target": "c사",
+  //       "거리": 3
+  //     },
+  //     {
+  //       "source": "b사",
+  //       "target": "d사",
+  //       "거리": 4
+  //     },
+  //     {
+  //       "source": "b사",
+  //       "target": "e사",
+  //       "거리": 4
+  //     },
+  //     {
+  //       "source": "b사",
+  //       "target": "f사",
+  //       "거리": 5
+  //     },
+  //     // 분할
+  //     {
+  //       "source": "d사",
+  //       "target": "e사",
+  //       "거리": 3
+  //     },
+  //     {
+  //       "source": "d사",
+  //       "target": "f사",
+  //       "거리": 3
+  //     }
+  //   ]
 
-    const networkGraph = {
-      createGraph: function(nodes:any, links:any){
-        // svg 크기
-        const width = 800;
-        const height = 800;
+  //   const networkGraph = {
+  //     createGraph: function(nodes:any, links:any){
+  //       // svg 크기
+  //       const width = 800;
+  //       const height = 800;
 
-        // 그룹별 컬러
-        const fillColor = (g:any) =>{
-          if(g == '주식회사'){
-            return 'pink';
-          } else if(g=='학원'){
-            return 'skyblue';
-          }else if(g=='연구원'){
-            return 'blue'
-          }else{
-            return 'red'
-          }
-        }
+  //       // 그룹별 컬러
+  //       const fillColor = (g:any) =>{
+  //         if(g == '주식회사'){
+  //           return 'pink';
+  //         } else if(g=='학원'){
+  //           return 'skyblue';
+  //         }else if(g=='연구원'){
+  //           return 'blue'
+  //         }else{
+  //           return 'red'
+  //         }
+  //       }
 
-          const simulation = d3.forceSimulation(nodes)
-          .force('link', d3.forceLink(links).id((d:any)=>d.id))
-          .force('charge',d3.forceManyBody().strength(0))// 모든 노드간 힘, 양: 인력, 음: 척력
-          .force('center',d3.forceCenter(width/2, height/2)) // 중력의 중심점
-          .force('collide', d3.forceCollide().radius((d:any)=>d.직원수 * 9)) // 노드가 겹쳐지지 않게, 줄이면 겹쳐짐
+  //         const simulation = d3.forceSimulation(nodes)
+  //         .force('link', d3.forceLink(links).id((d:any)=>d.id))
+  //         .force('charge',d3.forceManyBody().strength(0))// 모든 노드간 힘, 양: 인력, 음: 척력
+  //         .force('center',d3.forceCenter(width/2, height/2)) // 중력의 중심점
+  //         .force('collide', d3.forceCollide().radius((d:any)=>d.직원수 * 9)) // 노드가 겹쳐지지 않게, 줄이면 겹쳐짐
         
-          const canvas = d3.select('.canvas');
-          const svg = canvas.append('svg')
-          .attr('width',width)
-          .attr('height', height)
+  //         const canvas = d3.select('.canvas');
+  //         const svg = canvas.append('svg')
+  //         .attr('width',width)
+  //         .attr('height', height)
           
-          const g = svg.append('g')
+  //         const g = svg.append('g')
 
-          const link = g.append('g')
-          .attr('stroke', 'black')
-          .attr('stroke-width', 0.3)
-          .selectAll('line')
-          .data(links)
-          .join('line')
-          .attr('stroke-width', (d:any)=> Math.sqrt(d.거리 *3))
+  //         const link = g.append('g')
+  //         .attr('stroke', 'black')
+  //         .attr('stroke-width', 0.3)
+  //         .selectAll('line')
+  //         .data(links)
+  //         .join('line')
+  //         .attr('stroke-width', (d:any)=> Math.sqrt(d.거리 *3))
 
-          const node = g.append('g')
-          .selectAll('g')
-          .data(nodes)
-          .enter()
-          .append('g')
-          .each(function(d:any){
-            d3.select(this)
-            .append('circle')
-            .attr('r', d.직원수 * 5)
-            .attr('fill', fillColor(d.유형))
+  //         const node = g.append('g')
+  //         .selectAll('g')
+  //         .data(nodes)
+  //         .enter()
+  //         .append('g')
+  //         .each(function(d:any){
+  //           d3.select(this)
+  //           .append('circle')
+  //           .attr('r', d.직원수 * 5)
+  //           .attr('fill', fillColor(d.유형))
 
-            d3.select(this)
-            .append('text')
-            .text(`회사명 : ${d.id}, 직원수 : ${d.직원수}`)
-            // .text(`직원수 : ${d.직원수}`)
-            .attr('dy', 0)
-            .style('text-anchor', 'middle')
-          })
-          .call(drag(simulation))
+  //           d3.select(this)
+  //           .append('text')
+  //           .text(`회사명 : ${d.id}, 직원수 : ${d.직원수}`)
+  //           // .text(`직원수 : ${d.직원수}`)
+  //           .attr('dy', 0)
+  //           .style('text-anchor', 'middle')
+  //         })
+  //         .call(drag(simulation))
 
-          simulation.on('tick', function(){
-            link.attr('x1', (d:any)=> d.source.x)
-            .attr('y1', (d:any)=> d.source.y)
-            .attr('x2', (d:any)=> d.target.x)
-            .attr('y2', (d:any)=> d.target.y)
+  //         simulation.on('tick', function(){
+  //           link.attr('x1', (d:any)=> d.source.x)
+  //           .attr('y1', (d:any)=> d.source.y)
+  //           .attr('x2', (d:any)=> d.target.x)
+  //           .attr('y2', (d:any)=> d.target.y)
 
-            node.attr('transform', (d:any)=> `translate(${d.x}, ${d.y})`)
+  //           node.attr('transform', (d:any)=> `translate(${d.x}, ${d.y})`)
 
-            return svg.node()
-          })
-      }
-    }
+  //           return svg.node()
+  //         })
+  //     }
+  //   }
 
-    function drag(simulation:any){
-      function dragstarted(this: any, event:any, d:any) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        event.subject.fx = event.subject.x;
-        event.subject.fy = event.subject.y;
+  //   function drag(simulation:any){
+  //     function dragstarted(this: any, event:any, d:any) {
+  //       if (!event.active) simulation.alphaTarget(0.3).restart();
+  //       event.subject.fx = event.subject.x;
+  //       event.subject.fy = event.subject.y;
 
-        console.log(event)
-        console.log(d)
-        console.log(this)
+  //       console.log(event)
+  //       console.log(d)
+  //       console.log(this)
 
-        d3.select(this)
-        .select('circle')
-        .attr('stroke','black')
-        .attr('stroke-width','10px')
-      }
+  //       d3.select(this)
+  //       .select('circle')
+  //       .attr('stroke','black')
+  //       .attr('stroke-width','10px')
+  //     }
       
-      function dragged(event:any, d:any) {
-        event.subject.fx = event.x;
-        event.subject.fy = event.y;
-      }
+  //     function dragged(event:any, d:any) {
+  //       event.subject.fx = event.x;
+  //       event.subject.fy = event.y;
+  //     }
       
-      function dragended(this:any, event:any, d:any) {
-        if (!event.active) simulation.alphaTarget(0);
-        event.subject.fx = null;
-        event.subject.fy = null;
+  //     function dragended(this:any, event:any, d:any) {
+  //       if (!event.active) simulation.alphaTarget(0);
+  //       // event.subject.fx = null;
+  //       // event.subject.fy = null;
+  //       event.subject.fx = event.subject.x;
+  //       event.subject.fy = event.subject.y;
 
-        d3.select(this)
-        .select('circle')
-        .attr('stroke','null')
-        .attr('stroke-width','null')
-      }
+  //       d3.select(this)
+  //       .select('circle')
+  //       .attr('stroke','null')
+  //       .attr('stroke-width','null')
+  //     }
 
-      return (d3.drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended)) as any
-    }
+  //     return (d3.drag()
+  //     .on('start', dragstarted)
+  //     .on('drag', dragged)
+  //     .on('end', dragended)) as any
+  //   }
 
-    networkGraph.createGraph(nodes, links)
-  }
+  //   networkGraph.createGraph(nodes, links)
+  // }
 }

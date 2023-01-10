@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { LineComponent } from './line/line.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LectureComponent } from './lecture/lecture.component';
+import { RealtimeComponent } from './realtime/realtime.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LineComponent,
     RxjsComponent,
-    LectureComponent
+    LectureComponent,
+    RealtimeComponent
   ],
   imports: [
     BrowserModule
