@@ -11,7 +11,7 @@ export class RealtimeComponent implements OnInit {
   ngOnInit() {
         const graph = d3.select('.graph');
 
-        const n = 243;
+        const n = 24;
         const duration = 750
         var now: any = new Date(Date.now() - duration)
 
@@ -40,7 +40,8 @@ export class RealtimeComponent implements OnInit {
 
         const line: any = d3.line()
         .x(function(d, i) { return x(now - (n - 1 - i) * duration); })
-        .y(function(d:any, i) { return y(d); });
+        .y(function(d:any, i) { return y(d); })
+        .curve(d3.curveBasis);
 
         console.log(line(data))
 
@@ -49,7 +50,7 @@ export class RealtimeComponent implements OnInit {
         g.append('defs').append('clipPath')
           .attr('id', 'clip')
           .append('rect')
-          .attr('width', width)
+          .attr('width', width+20)
           .attr('height', height)
 
         // g.append('g')
@@ -64,13 +65,13 @@ export class RealtimeComponent implements OnInit {
 
         var axis = g.append('g')
           .attr('class', 'x axis')
-          .attr('transform', `translate(30,${height + 10})`)
+          .attr('transform', `translate(5,${height + 10})`)
           .call(d3.axisBottom(x))
           // .call(x.axis = d3.axisBottom(x))
 
         g.append('g')
           .attr('class', 'axis axis--y')
-          .attr('transform', `translate(${30},+10)`)
+          .attr('transform', `translate(${5},10)`)
           .call(d3.axisLeft(y))
 
 
@@ -135,6 +136,8 @@ export class RealtimeComponent implements OnInit {
           // data.push(Math.min(30, count)); // 새로운 데이터 포인트를 뒤에 push.
           data.push(Math.random())
           // count = 0;
+          // count++;
+          // data[count%n] = Math.random();
     
           d3.select(this) // 기본 변환행렬 초기화
             .attr("d", line(data))
