@@ -90,9 +90,6 @@ export class RealtimeComponent implements OnInit {
         .ease(d3.easeLinear)
         .on("start", tick);
 
-        d3.select('#myDiv').on("click", function(){
-          ++count;
-        });
 
         // const path = g.append('g')
         // .attr('clip-path', 'url(#clip)')

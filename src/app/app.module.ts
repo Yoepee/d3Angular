@@ -6,6 +6,7 @@ import { LineComponent } from './line/line.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LectureComponent } from './lecture/lecture.component';
 import { RealtimeComponent } from './realtime/realtime.component';
+import { PoprealComponent } from './popreal/popreal.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RealtimeComponent } from './realtime/realtime.component';
     LineComponent,
     RxjsComponent,
     LectureComponent,
-    RealtimeComponent
+    RealtimeComponent,
+    PoprealComponent
   ],
   imports: [
     BrowserModule
