@@ -41,7 +41,7 @@ export class PoprealComponent implements OnInit {
     const line:any = d3.line()
         .x(function(d, i) { return axisX(now - (n - 1 - i) * duration); })
         .y(function(d:any, i) { return axisY(d); })
-        .curve(d3.curveBasis);
+        .curve(d3.curveBumpY);
 
     const graph = svg. append('g')
        .attr('width', graphWidth)
@@ -74,8 +74,8 @@ export class PoprealComponent implements OnInit {
        .attr('d', line(data))
 
       
-       const result = interval(100).pipe(take(100))
-      //  const result = interval(100)
+      //  const result = interval(100).pipe(take(1000))
+       const result = interval(100)
        .subscribe(x=> {
         d3.select('.test').remove()
         d3.select('.rect').remove()
@@ -83,11 +83,11 @@ export class PoprealComponent implements OnInit {
         data.splice(0,-1);
 
         data[count%n]= (Math.random() * 100)
-        data[count+1%n]= (Math.random() * 100)
-        data[count+2%n]= (Math.random() * 100)
-        data[count+3%n]= (Math.random() * 100)
-        data[count+4%n]= (Math.random() * 100)
-        count+=5;
+        // data[count+1%n]= (Math.random() * 100)
+        // data[count+2%n]= (Math.random() * 100)
+        // data[count+3%n]= (Math.random() * 100)
+        // data[count+4%n]= (Math.random() * 100)
+        count+=1;
 
         // data.reverse();
         
@@ -113,7 +113,7 @@ export class PoprealComponent implements OnInit {
       .attr('class', 'rect')
        .attr('height', graphHeight)
        .attr('width', 30)
-       .attr('x', (count*9) % graphWidth )
+       .attr('x', (count*9) % graphWidth -30 )
        .attr('y', -1)
        .attr('fill', 'black')
       });
