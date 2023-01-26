@@ -80,6 +80,9 @@ export class RxjsComponent implements OnInit {
      * takeUntil 값이 흘러가면 처리를 중단 ( 특정 조건을 이용하여 스트림 종료 )
      */
     const result5 = interval(1000).pipe(
+      // tap(x => {
+      //   console.log(x+1)
+      // return x+10}),
       takeUntil(clicks),
     )
     .subscribe(x=> console.log(x));

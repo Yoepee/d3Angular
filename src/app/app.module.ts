@@ -15,7 +15,7 @@ import { PoprealComponent } from './popreal/popreal.component';
     RxjsComponent,
     LectureComponent,
     RealtimeComponent,
-    PoprealComponent
+    PoprealComponent,
   ],
   imports: [
     BrowserModule

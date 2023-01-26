@@ -11,17 +11,22 @@ export class RealtimeComponent implements OnInit {
   ngOnInit() {
     const graph = d3.select('.graph');
 
-    const n = 53;
+    const n = 803;
     const duration = 750
     var now: any = new Date(Date.now() - duration)
 
     var count: any = 0;
-    var data: any = d3.range(n).map(() => 0.5);
+    var data: any = d3.range(n).map(() => 32500);
+
+    d3.json("/assets/data/test.json")
+    .then((d:any) => {
+      data = (d.flat());
+    });
 
 
     const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
-    const width = 1000 - margin.left - margin.right;
+    const width = 2000 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
     const svg = graph.append('svg')
@@ -35,7 +40,7 @@ export class RealtimeComponent implements OnInit {
     // .ticks(10)
 
     var y = d3.scaleLinear()
-      .domain([0, 1])
+      .domain([32400, 32600])
       .range([height, 0]);
 
     const line: any = d3.line()
@@ -88,7 +93,7 @@ export class RealtimeComponent implements OnInit {
       // .attr('d', line(data))
       // .attr('transform', `translate()`)
       .transition()
-      .duration(100)
+      .duration(10)
       .ease(d3.easeLinear)
       .on("start", tick);
 
@@ -142,7 +147,7 @@ export class RealtimeComponent implements OnInit {
       now = new Date();
       x.domain([now - (n - 2) * duration, now - duration]);
       // y.domain([0, (d3.max(data) as any)]);
-      y.domain([0, 1]);
+      y.domain([d3.min(data) as any, d3.max(data) as any]);
       // data.push(Math.min(30, count)); // 새로운 데이터 포인트를 뒤에 push.
       // data.push(Math.random())
       // data.push(Math.random())
@@ -164,16 +169,20 @@ export class RealtimeComponent implements OnInit {
       //   }
       // }
       // count = 0;
-      count+=1;
-      // count++;
-      if (count%10< 5){
-        data[count%n] = 0.5+0.3;
-      }
+      // count+=5;
+      count++;
+      // if (count%10< 5){
+      //   data[count%n] = 32500;
+      // }
 
-      else
-        data[count%n] = 0.1;
-
-      console.log(data)
+      // else
+      //   data[count%n] = 32500;
+      data[count%n] = data[count%2000];
+      // data[(count+1)%n] = data[(count+1)%2000];
+      // data[count+2%n] = data[count+2%2000];
+      // data[count+3%n] = data[count+3%2000];
+      // data[count+4%n] = data[count+4%2000];
+      // console.log(data)
 
       d3.select(this) // 기본 변환행렬 초기화
         .attr("d", line(data))
@@ -185,8 +194,8 @@ export class RealtimeComponent implements OnInit {
         .attr('height', height)
         .attr('width', 30)
         .attr('x', x(now - (n - 1 - (count%n)) * duration))
-        .attr('y', -1)
-        .attr('fill', 'gray')
+        .attr('y', 0)
+        .attr('fill', 'red')
 
         // d3.select('.line')
         // .append('rect')

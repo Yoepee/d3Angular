@@ -75,48 +75,48 @@ export class PoprealComponent implements OnInit {
 
       
       //  const result = interval(100).pipe(take(1000))
-       const result = interval(100)
-       .subscribe(x=> {
-        d3.select('.test').remove()
-        d3.select('.rect').remove()
+      //  const result = interval(100)
+      //  .subscribe(x=> {
+      //   d3.select('.test').remove()
+      //   d3.select('.rect').remove()
 
-        data.splice(0,-1);
+      //   data.splice(0,-1);
 
-        data[count%n]= (Math.random() * 100)
-        // data[count+1%n]= (Math.random() * 100)
-        // data[count+2%n]= (Math.random() * 100)
-        // data[count+3%n]= (Math.random() * 100)
-        // data[count+4%n]= (Math.random() * 100)
-        count+=1;
+      //   data[count%n]= (Math.random() * 100)
+      //   // data[count+1%n]= (Math.random() * 100)
+      //   // data[count+2%n]= (Math.random() * 100)
+      //   // data[count+3%n]= (Math.random() * 100)
+      //   // data[count+4%n]= (Math.random() * 100)
+      //   count+=1;
 
-        // data.reverse();
+      //   // data.reverse();
         
-        now = new Date();
-        axisX.domain([now - (n - 2) * duration, now - duration]);
+      //   now = new Date();
+      //   axisX.domain([now - (n - 2) * duration, now - duration]);
 
-        axis.transition() // x축 설정, transition화
-            .duration(0)
-            .ease(d3.easeLinear)
-            .call(d3.axisBottom(axisX));
+      //   axis.transition() // x축 설정, transition화
+      //       .duration(0)
+      //       .ease(d3.easeLinear)
+      //       .call(d3.axisBottom(axisX));
 
 
-        lineChart.append("path") // path: 실제 데이터 구현 부
-       .datum(data)
-       .attr('class', 'test')
-       .attr('fill', 'none')
-       .attr('stroke', 'green')
-       .attr('stroke-width', '1.5px')
-       .attr('transform', 'translate(0,0)')
-       .attr('d', line(data))
+      //   lineChart.append("path") // path: 실제 데이터 구현 부
+      //  .datum(data)
+      //  .attr('class', 'test')
+      //  .attr('fill', 'none')
+      //  .attr('stroke', 'green')
+      //  .attr('stroke-width', '1.5px')
+      //  .attr('transform', 'translate(0,0)')
+      //  .attr('d', line(data))
 
-      lineChart.append('rect')
-      .attr('class', 'rect')
-       .attr('height', graphHeight)
-       .attr('width', 30)
-       .attr('x', (count*9) % graphWidth -30 )
-       .attr('y', -1)
-       .attr('fill', 'black')
-      });
+      // // lineChart.append('rect')
+      // // .attr('class', 'rect')
+      // //  .attr('height', graphHeight)
+      // //  .attr('width', 30)
+      // //  .attr('x', (count*9) % graphWidth -30 )
+      // //  .attr('y', -1)
+      // //  .attr('fill', 'black')
+      // });
       
     
   }
