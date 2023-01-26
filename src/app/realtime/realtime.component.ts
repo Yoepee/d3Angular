@@ -17,10 +17,11 @@ export class RealtimeComponent implements OnInit {
 
     var count: any = 0;
     var data: any = d3.range(n).map(() => 32500);
+    var arr:any=d3.range(n).map(() => 32500);;
 
     d3.json("/assets/data/test.json")
     .then((d:any) => {
-      data = (d.flat());
+      arr = (d.flat());
     });
 
 
@@ -147,7 +148,7 @@ export class RealtimeComponent implements OnInit {
       now = new Date();
       x.domain([now - (n - 2) * duration, now - duration]);
       // y.domain([0, (d3.max(data) as any)]);
-      y.domain([d3.min(data) as any, d3.max(data) as any]);
+      y.domain([d3.min(arr) as any, d3.max(arr) as any]);
       // data.push(Math.min(30, count)); // 새로운 데이터 포인트를 뒤에 push.
       // data.push(Math.random())
       // data.push(Math.random())
@@ -177,7 +178,7 @@ export class RealtimeComponent implements OnInit {
 
       // else
       //   data[count%n] = 32500;
-      data[count%n] = data[count%2000];
+      data[count%n] = arr[count%2000];
       // data[(count+1)%n] = data[(count+1)%2000];
       // data[count+2%n] = data[count+2%2000];
       // data[count+3%n] = data[count+3%2000];
